@@ -48,8 +48,8 @@ components:
           type: integer
         name:
           type: string
-        model:
-          $ref: '#/components/schemas/EngineOption'
+        brand:
+          $ref: '#/components/schemas/CarBrand'
         variations:
           type: array
           items:
