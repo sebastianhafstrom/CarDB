@@ -1,0 +1,96 @@
+openapi: 3.1.0
+info:
+  title: Car API
+  version: 1.0.0
+  description: API for searching car models, variations, engine options, and specs
+
+paths:
+  /cars:
+    get:
+      summary: Get cars
+      description: Retrieves a list of car models
+      parameters:
+        - name: brand
+          in: query
+          description: Filter car models by brand
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarModel'
+
+  /brands:
+    get:
+      summary: Get car brands
+      description: Retrieves a list of car brands
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarBrand'
+
+components:
+  schemas:
+    CarModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        model:
+          $ref: '#/components/schemas/EngineOption'
+        variations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarVariation'
+        specs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Spec'
+
+    CarVariation:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        engineOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngineOption'
+
+    EngineOption:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    Spec:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    CarBrand:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
