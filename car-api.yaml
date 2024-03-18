@@ -1,96 +1,224 @@
 openapi: 3.1.0
+servers:
+    - url: http://localhost:8080
+      description: Local server
 info:
-  title: Car API
-  version: 1.0.0
-  description: API for searching car models, variations, engine options, and specs
+    title: CarDB API
+    version: 1.0.0
+    description: API for searching car models, variations, engine options, and specs
+    license:
+        name: MIT
+        url: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 paths:
-  /cars:
-    get:
-      summary: Get cars
-      description: Retrieves a list of car models
-      parameters:
-        - name: brand
-          in: query
-          description: Filter car models by brand
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CarModel'
-
-  /brands:
-    get:
-      summary: Get car brands
-      description: Retrieves a list of car brands
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CarBrand'
-
+    /cars:
+        get:
+            summary: Get cars
+            description: Retrieves a list of car models
+            operationId: getCars
+            parameters:
+                - name: brand
+                  in: query
+                  description: Filter car models by brand
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: Successful response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListCarsResponse'
+                '400':
+                    description: Invalid query parameter
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                '401':
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /car/{id}:
+        get:
+            summary: Get car
+            description: Retrieves a single car model
+            operationId: getCar
+            parameters:
+                - name: id
+                  in: path
+                  description: ID of the car model to retrieve
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Successful response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CarModel'
+                '400':
+                    description: Invalid ID supplied
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                '401':
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                '404':
+                    description: Car model not found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /brands:
+        get:
+            summary: Get car brands
+            description: Retrieves a list of car brands
+            operationId: getBrands
+            parameters:
+                - name: name
+                  in: query
+                  description: Filter car brands by name
+                  schema:
+                    type: string
+            responses:
+                '200':
+                    description: Successful response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBrandsResponse'
+                '400':
+                    description: Invalid query parameter
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                '401':
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+    /brands/{id}:
+        get:
+            summary: Get car brand
+            description: Retrieves a single car brand
+            operationId: getBrand
+            parameters:
+                - name: id
+                  in: path
+                  description: ID of the car brand to retrieve
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: Successful response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CarBrand'
+                '400':
+                    description: Invalid ID supplied
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                '401':
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                '404':
+                    description: Car brand not found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
 components:
-  schemas:
-    CarModel:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        brand:
-          $ref: '#/components/schemas/CarBrand'
-        variations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CarVariation'
-        specs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Spec'
+    schemas:
+        ListCarsResponse:
+            type: object
+            properties:
+                cars:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CarModel'
+        ListBrandsResponse:
+            type: object
+            properties:
+                brands:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CarBrand'
+        CarModel:
+            type: object
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+                brand:
+                    $ref: '#/components/schemas/CarBrand'
+                variations:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CarVariation'
+                specs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Spec'
 
-    CarVariation:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        engineOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/EngineOption'
+        CarVariation:
+            type: object
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+                engineOptions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/EngineOption'
 
-    EngineOption:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
+        EngineOption:
+            type: object
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
 
-    Spec:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
+        Spec:
+            type: object
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
 
-    CarBrand:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
+        CarBrand:
+            type: object
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+        
+        Error:
+            type: object
+            properties:
+                statusCode:
+                    type: integer
+                message:
+                    type: string

@@ -28,4 +28,7 @@ A Datbase with all the cars, models, variations, engines, specs and so much more
 - Forum
 - Service tips for each car
 - General car knowledge, depending on country
+- Find new cars to buy, and link to new cars to buy from a specific cars
+- Find used cars to buy, and link to used cars to buy from a specific cars
+- Find cars to lease, and link to cars to lease from a specific cars
 - And more that I can not think of right now :)
