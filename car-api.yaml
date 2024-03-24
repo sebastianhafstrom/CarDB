@@ -16,12 +16,6 @@ paths:
             summary: Get cars
             description: Retrieves a list of car models
             operationId: getCars
-            parameters:
-                - name: brand
-                  in: query
-                  description: Filter car models by brand
-                  schema:
-                      type: string
             responses:
                 '200':
                     description: Successful response
@@ -30,7 +24,7 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/ListCarsResponse'
                 '400':
-                    description: Invalid query parameter
+                    description: Bad request
                     content:
                         application/json:
                             schema:
@@ -41,18 +35,18 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Error'
-    /car/{id}:
+    /car/{slug}:
         get:
             summary: Get car
             description: Retrieves a single car model
             operationId: getCar
             parameters:
-                - name: id
+                - name: slug
                   in: path
-                  description: ID of the car model to retrieve
+                  description: Slug of car model to retrieve
                   required: true
                   schema:
-                      type: integer
+                      type: string
             responses:
                 '200':
                     description: Successful response
@@ -83,12 +77,6 @@ paths:
             summary: Get car brands
             description: Retrieves a list of car brands
             operationId: getBrands
-            parameters:
-                - name: name
-                  in: query
-                  description: Filter car brands by name
-                  schema:
-                    type: string
             responses:
                 '200':
                     description: Successful response
@@ -108,18 +96,18 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Error'
-    /brands/{id}:
+    /brands/{slug}:
         get:
             summary: Get car brand
             description: Retrieves a single car brand
             operationId: getBrand
             parameters:
-                - name: id
+                - name: slug
                   in: path
-                  description: ID of the car brand to retrieve
+                  description: Slug of the car brand to retrieve
                   required: true
                   schema:
-                      type: integer
+                      type: string
             responses:
                 '200':
                     description: Successful response
@@ -128,7 +116,7 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CarBrand'
                 '400':
-                    description: Invalid ID supplied
+                    description: Bad request
                     content:
                         application/json:
                             schema:
@@ -153,7 +141,17 @@ components:
                 cars:
                     type: array
                     items:
-                        $ref: '#/components/schemas/CarModel'
+                        type: object
+                        properties:
+                            id:
+                                type: number
+                            name:
+                                type: string
+                            slug:
+                                type: string
+                            body_type:
+                                $ref: '#/components/schemas/BodyType'
+
         ListBrandsResponse:
             type: object
             properties:
@@ -165,31 +163,50 @@ components:
             type: object
             properties:
                 id:
-                    type: integer
+                    type: number
                 name:
                     type: string
+                slug:
+                    type: string
+                body_type:
+                    $ref: '#/components/schemas/BodyType'
                 brand:
                     $ref: '#/components/schemas/CarBrand'
-                variations:
+                generations:
                     type: array
                     items:
-                        $ref: '#/components/schemas/CarVariation'
-                specs:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Spec'
+                        $ref: '#/components/schemas/CarGeneration'
 
-        CarVariation:
+        CarGeneration:
             type: object
             properties:
                 id:
                     type: integer
                 name:
                     type: string
+                production_start_year:
+                    type: integer
+                production_end_year:
+                    type: 
+                        - integer
+                        - null
+                tire_size:
+                    type: string
+                length_mm:
+                    type: integer
+                width_mm:
+                    type: integer
+                height_mm:
+                    type: integer
+                ground_clearance_mm:
+                    type: integer
+                cargo_volume_litres:
+                    type: integer
                 engineOptions:
                     type: array
                     items:
                         $ref: '#/components/schemas/EngineOption'
+                # Add weight
 
         EngineOption:
             type: object
@@ -198,14 +215,34 @@ components:
                     type: integer
                 name:
                     type: string
-
-        Spec:
-            type: object
-            properties:
-                id:
+                fuel_type:
+                    $ref: '#/components/schemas/FuelType'
+                drive_type:
+                    $ref: '#/components/schemas/DriveType'
+                transmission_type:
+                    $ref: '#/components/schemas/TransmissionType'
+                number_of_gears:
                     type: integer
-                name:
-                    type: string
+                number_of_cylinders:
+                    type: integer
+                cylinder_layout:
+                    $ref: '#/components/schemas/CylinderLayout'
+                fuel_econonmy_city_l_per_100km:
+                    type: number
+                fuel_economy_highway_l_per_100km:
+                    type: number
+                fuel_economy_combined_l_per_100km:
+                    type: number
+                power_kw:
+                    type: number
+                power_hp:
+                    type: number
+                power_bhp:
+                    type: number
+                top_speed_kph:
+                    type: integer
+                acceleration_0_100_kph:
+                    type: number
 
         CarBrand:
             type: object
@@ -214,7 +251,60 @@ components:
                     type: integer
                 name:
                     type: string
+                origin_country:
+                    type: string
+                website:
+                    type: string
+                slug:
+                    type: string
+
+        BodyType:
+            type: string
+            enum:
+                - SEDAN
+                - COUPE
+                - CONVERTIBLE
+                - WAGON
+                - HATCHBACK
+                - SUV
+                - TRUCK
+                - VAN
+
+        FuelType:
+            type: string
+            enum:
+                - PETROL
+                - DIESEL
+                - ELECTRIC
+                - HYBRID
+                - PLUG_IN_HYBRID
+                - HYDROGEN
         
+        DriveType:
+            type: string
+            enum:
+                - FWD
+                - RWD
+                - AWD
+        
+        TransmissionType:
+            type: string
+            enum:
+                - MANUAL
+                - AUTOMATIC
+                - CVT
+                - DCT
+        
+        CylinderLayout:
+            type: string
+            enum:
+                - INLINE
+                - V
+                - FLAT
+                - ROTARY
+                - ELECTRIC
+                - HYDROGEN
+
         Error:
             type: object
             properties:
