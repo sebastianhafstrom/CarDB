@@ -4,11 +4,8 @@ servers:
       description: Local server
 info:
     title: CarDB API
-    version: 1.0.0
+    version: 0.0.1
     description: API for searching car models, variations, engine options, and specs
-    license:
-        name: MIT
-        url: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 paths:
     /cars:
@@ -16,13 +13,36 @@ paths:
             summary: Get cars
             description: Retrieves a list of car models
             operationId: getCars
+            parameters:
+                - in: query
+                  name: search
+                  schema:
+                      type: string
+                  description: The search string
+                - in: query
+                  name: brandIds
+                  schema:
+                      type: array
+                      items:
+                        type: string
+                        format: uuid
+                  description: The ids of the brands to filter by
+                - in: query
+                  name: body_types
+                  schema:
+                      type: array
+                      items:
+                          $ref: '#/components/schemas/ApiBodyType'
+                  description: The body types to filter by
             responses:
                 '200':
                     description: Successful response
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ListCarsResponse'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/ApiCarModel'
                             examples:
                                 default_example:
                                     value:
@@ -52,7 +72,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
                             examples:
                                 default_example:
                                     value:
@@ -63,13 +83,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
                             examples:
                                 default_example:
                                     value:
                                         statusCode: 401
                                         message: 'Unauthorized'
-    /car/{slug}:
+    /cars/{slug}:
         get:
             summary: Get car
             description: Retrieves a single car model
@@ -87,7 +107,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/CarModel'
+                                $ref: '#/components/schemas/ApiCarModel'
                             examples:
                                 skoda_octavia_combi:
                                     summary: Skoda Octavia Combi
@@ -122,7 +142,7 @@ paths:
                                                   number_of_gears: 6
                                                   number_of_cylinders: 3
                                                   cylinder_layout: 'INLINE'
-                                                  fuel_econonmy_city_l_per_100km: 6.0
+                                                  fuel_economy_city_l_per_100km: 6.0
                                                   fuel_economy_highway_l_per_100km: 4.5
                                                   fuel_economy_combined_l_per_100km: 5.0
                                                   power_kw: 81
@@ -138,7 +158,7 @@ paths:
                                                   number_of_gears: 6
                                                   number_of_cylinders: 4
                                                   cylinder_layout: 'INLINE'
-                                                  fuel_econonmy_city_l_per_100km: 7.0
+                                                  fuel_economy_city_l_per_100km: 7.0
                                                   fuel_economy_highway_l_per_100km: 5.0
                                                   fuel_economy_combined_l_per_100km: 6.0
                                                   power_kw: 110
@@ -153,7 +173,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
                             examples:
                                 default_example:
                                     value:
@@ -164,7 +184,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
                             examples:
                                 default_example:
                                     value:
@@ -175,7 +195,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
                             examples:
                                 default_example:
                                     value:
@@ -192,7 +212,9 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ListBrandsResponse'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/ApiCarBrand'
                             examples:
                                 default_example:
                                     value:
@@ -210,7 +232,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
                             examples:
                                 default_example:
                                     value:
@@ -221,7 +243,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
     /brands/{slug}:
         get:
             summary: Get car brand
@@ -240,7 +262,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/CarBrand'
+                                $ref: '#/components/schemas/ApiCarBrand'
                             examples:
                                 default_example:
                                     value:
@@ -253,7 +275,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
                             examples:
                                 default_example:
                                     value:
@@ -264,7 +286,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
                             examples:
                                 default_example:
                                     value:
@@ -275,7 +297,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: '#/components/schemas/ApiError'
                             examples:
                                 default_example:
                                     value:
@@ -283,55 +305,31 @@ paths:
                                         message: 'Car brand not found'
 components:
     schemas:
-        ListCarsResponse:
-            type: object
-            properties:
-                cars:
-                    type: array
-                    items:
-                        type: object
-                        properties:
-                            id:
-                                type: number
-                            name:
-                                type: string
-                            slug:
-                                type: string
-                            body_type:
-                                $ref: '#/components/schemas/BodyType'
-                            brand:
-                                $ref: '#/components/schemas/CarBrand'
-
-        ListBrandsResponse:
-            type: object
-            properties:
-                brands:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/CarBrand'
-        CarModel:
+        ApiCarModel:
             type: object
             properties:
                 id:
-                    type: number
+                    type: string
+                    format: uuid
                 name:
                     type: string
                 slug:
                     type: string
                 body_type:
-                    $ref: '#/components/schemas/BodyType'
+                    $ref: '#/components/schemas/ApiBodyType'
                 brand:
-                    $ref: '#/components/schemas/CarBrand'
+                    $ref: '#/components/schemas/ApiCarBrand'
                 generations:
                     type: array
                     items:
-                        $ref: '#/components/schemas/CarGeneration'
+                        $ref: '#/components/schemas/ApiCarGeneration'
 
-        CarGeneration:
+        ApiCarGeneration:
             type: object
             properties:
                 id:
-                    type: integer
+                    type: string
+                    format: uuid
                 name:
                     type: string
                 production_start_year:
@@ -355,10 +353,10 @@ components:
                 engine_options:
                     type: array
                     items:
-                        $ref: '#/components/schemas/EngineOption'
+                        $ref: '#/components/schemas/ApiEngineOption'
                 # Add weight
 
-        EngineOption:
+        ApiEngineOption:
             type: object
             properties:
                 id:
@@ -366,18 +364,18 @@ components:
                 name:
                     type: string
                 fuel_type:
-                    $ref: '#/components/schemas/FuelType'
+                    $ref: '#/components/schemas/ApiFuelType'
                 drive_type:
-                    $ref: '#/components/schemas/DriveType'
+                    $ref: '#/components/schemas/ApiDriveType'
                 transmission_type:
-                    $ref: '#/components/schemas/TransmissionType'
+                    $ref: '#/components/schemas/ApiTransmissionType'
                 number_of_gears:
                     type: integer
                 number_of_cylinders:
                     type: integer
                 cylinder_layout:
-                    $ref: '#/components/schemas/CylinderLayout'
-                fuel_econonmy_city_l_per_100km:
+                    $ref: '#/components/schemas/ApiCylinderLayout'
+                fuel_economy_city_l_per_100km:
                     type: number
                 fuel_economy_highway_l_per_100km:
                     type: number
@@ -394,11 +392,12 @@ components:
                 acceleration_0_100_kph:
                     type: number
 
-        CarBrand:
+        ApiCarBrand:
             type: object
             properties:
                 id:
-                    type: integer
+                    type: string
+                    format: uuid
                 name:
                     type: string
                 origin_country:
@@ -408,7 +407,7 @@ components:
                 slug:
                     type: string
 
-        BodyType:
+        ApiBodyType:
             type: string
             enum:
                 - SEDAN
@@ -420,32 +419,35 @@ components:
                 - TRUCK
                 - VAN
 
-        FuelType:
+        ApiFuelType:
             type: string
             enum:
                 - PETROL
                 - DIESEL
                 - ELECTRIC
                 - HYBRID
-                - PLUG_IN_HYBRID
+                - PLUGIN_HYBRID
+                - LPG
+                - CNG
                 - HYDROGEN
 
-        DriveType:
+        ApiDriveType:
             type: string
             enum:
                 - FWD
                 - RWD
                 - AWD
 
-        TransmissionType:
+        ApiTransmissionType:
             type: string
             enum:
                 - MANUAL
                 - AUTOMATIC
+                - SEMI_AUTOMATIC
                 - CVT
                 - DCT
 
-        CylinderLayout:
+        ApiCylinderLayout:
             type: string
             enum:
                 - INLINE
@@ -454,8 +456,9 @@ components:
                 - ROTARY
                 - ELECTRIC
                 - HYDROGEN
+                - HYBRID
 
-        Error:
+        ApiError:
             type: object
             properties:
                 statusCode:
