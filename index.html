@@ -1018,6 +1018,13 @@
             data-styled.g60[id='sc-iLXxbI'] {
                 content: 'gfdSsP,';
             } /*!sc*/
+            .iUxudT {
+                color: #666;
+                word-break: break-word;
+            } /*!sc*/
+            data-styled.g61[id='sc-jgraLO'] {
+                content: 'iUxudT,';
+            } /*!sc*/
             .ciWJhv {
                 color: #d41f1c;
                 font-size: 0.9em;
@@ -1027,6 +1034,28 @@
             } /*!sc*/
             data-styled.g62[id='sc-eKzvBH'] {
                 content: 'ciWJhv,';
+            } /*!sc*/
+            .cRxwgg {
+                border-radius: 2px;
+                word-break: break-word;
+                background-color: rgba(51, 51, 51, 0.05);
+                color: rgba(51, 51, 51, 0.9);
+                padding: 0 5px;
+                border: 1px solid rgba(51, 51, 51, 0.1);
+                font-family: Courier, monospace;
+            } /*!sc*/
+            + {
+                margin-left: 0;
+            } /*!sc*/
+            data-styled.g66[id='sc-ldgOGP'] {
+                content: 'cRxwgg,';
+            } /*!sc*/
+            .bDgvzj {
+                margin: 0 5px;
+                vertical-align: text-top;
+            } /*!sc*/
+            data-styled.g74[id='sc-jIYCZY'] {
+                content: 'bDgvzj,';
             } /*!sc*/
             .ObWVe {
                 margin-top: 0;
@@ -1047,33 +1076,6 @@
             } /*!sc*/
             data-styled.g92[id='sc-crHHJw'] {
                 content: 'iGcmRf,';
-            } /*!sc*/
-            .bTPOee::before {
-                content: '|';
-                display: inline-block;
-                opacity: 0.5;
-                width: 15px;
-                text-align: center;
-            } /*!sc*/
-            .bTPOee:last-child::after {
-                display: none;
-            } /*!sc*/
-            data-styled.g93[id='sc-dEFUer'] {
-                content: 'bTPOee,';
-            } /*!sc*/
-            .fiaqWn {
-                overflow: hidden;
-            } /*!sc*/
-            data-styled.g94[id='sc-bqOYya'] {
-                content: 'fiaqWn,';
-            } /*!sc*/
-            .jqfeha {
-                display: flex;
-                flex-wrap: wrap;
-                margin-left: -15px;
-            } /*!sc*/
-            data-styled.g95[id='sc-gHjVMF'] {
-                content: 'jqfeha,';
             } /*!sc*/
             .gxSVta {
                 width: 9ex;
@@ -1725,7 +1727,7 @@
                             <div class="sc-hLQSwg gikxZY api-info">
                                 <h1 class="sc-fsYfdN sc-eFyDpN gqLiaw ObWVe">
                                     CarDB API<!-- -->
-                                    <span>(<!-- -->1.0.0<!-- -->)</span>
+                                    <span>(<!-- -->0.0.1<!-- -->)</span>
                                 </h1>
                                 <p>
                                     Download OpenAPI specification<!-- -->:<a
@@ -1735,20 +1737,9 @@
                                         >Download</a
                                     >
                                 </p>
-                                <div class="sc-iKOmoZ sc-cCzLxZ WVNwY VEBGS">
-                                    <div class="sc-bqOYya fiaqWn">
-                                        <div class="sc-gHjVMF jqfeha">
-                                            <!-- -->
-                                            <span class="sc-dEFUer bTPOee"
-                                                >License:<!-- -->
-                                                <a
-                                                    href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-                                                    >MIT</a
-                                                ></span
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
+                                <div
+                                    class="sc-iKOmoZ sc-cCzLxZ WVNwY VEBGS"
+                                ></div>
                                 <div
                                     data-role="redoc-summary"
                                     html=""
@@ -1795,6 +1786,191 @@
                                     >
                                         <p>Retrieves a list of car models</p>
                                     </div>
+                                </div>
+                                <div>
+                                    <h5 class="sc-irLvIq cnGhhy">
+                                        query<!-- -->
+                                        Parameters
+                                    </h5>
+                                    <table class="sc-hIPBNq kHkWhD">
+                                        <tbody>
+                                            <tr class="">
+                                                <td
+                                                    kind="field"
+                                                    title="search"
+                                                    class="sc-hABBmJ sc-fHejqy cqoAxn hfWKVF"
+                                                >
+                                                    <span
+                                                        class="sc-ifyrAs hIHfpT"
+                                                    ></span
+                                                    ><span class="property-name"
+                                                        >search</span
+                                                    >
+                                                </td>
+                                                <td class="sc-blmEgr berbbf">
+                                                    <div>
+                                                        <div>
+                                                            <span
+                                                                class="sc-gUjWJS sc-kZOsHZ itHPsH iSyacY"
+                                                            ></span
+                                                            ><span
+                                                                class="sc-gUjWJS sc-iLXxbI itHPsH gfdSsP"
+                                                                >string</span
+                                                            >
+                                                        </div>
+                                                        <div>
+                                                            <div
+                                                                html="&lt;p&gt;The search string&lt;/p&gt;
+"
+                                                                class="sc-iKOmoZ sc-cCzLxZ WVNwY jaVotg"
+                                                            >
+                                                                <p>
+                                                                    The search
+                                                                    string
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="">
+                                                <td
+                                                    kind="field"
+                                                    title="brandIds"
+                                                    class="sc-hABBmJ sc-fHejqy cqoAxn hfWKVF"
+                                                >
+                                                    <span
+                                                        class="sc-ifyrAs hIHfpT"
+                                                    ></span
+                                                    ><span class="property-name"
+                                                        >brandIds</span
+                                                    >
+                                                </td>
+                                                <td class="sc-blmEgr berbbf">
+                                                    <div>
+                                                        <div>
+                                                            <span
+                                                                class="sc-gUjWJS sc-kZOsHZ itHPsH iSyacY"
+                                                                >Array of </span
+                                                            ><span
+                                                                class="sc-gUjWJS sc-iLXxbI itHPsH gfdSsP"
+                                                                >strings</span
+                                                            ><span
+                                                                class="sc-gUjWJS sc-iLXxbI itHPsH gfdSsP"
+                                                            >
+                                                                <!-- -->&lt;<!-- -->uuid<!-- -->&gt;<!-- --> </span
+                                                            ><span
+                                                                class="sc-gUjWJS sc-kZOsHZ sc-jIYCZY itHPsH iSyacY bDgvzj"
+                                                                >[ items<span
+                                                                    class="sc-gUjWJS sc-iLXxbI itHPsH gfdSsP"
+                                                                >
+                                                                    &lt;<!-- -->uuid<!-- -->
+                                                                    &gt;</span
+                                                                >
+                                                                ]</span
+                                                            >
+                                                        </div>
+                                                        <div>
+                                                            <div
+                                                                html="&lt;p&gt;The ids of the brands to filter by&lt;/p&gt;
+"
+                                                                class="sc-iKOmoZ sc-cCzLxZ WVNwY jaVotg"
+                                                            >
+                                                                <p>
+                                                                    The ids of
+                                                                    the brands
+                                                                    to filter by
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="last">
+                                                <td
+                                                    kind="field"
+                                                    title="body_types"
+                                                    class="sc-hABBmJ sc-fHejqy cqoAxn hfWKVF"
+                                                >
+                                                    <span
+                                                        class="sc-ifyrAs hIHfpT"
+                                                    ></span
+                                                    ><span class="property-name"
+                                                        >body_types</span
+                                                    >
+                                                </td>
+                                                <td class="sc-blmEgr berbbf">
+                                                    <div>
+                                                        <div>
+                                                            <span
+                                                                class="sc-gUjWJS sc-kZOsHZ itHPsH iSyacY"
+                                                                >Array of </span
+                                                            ><span
+                                                                class="sc-gUjWJS sc-iLXxbI itHPsH gfdSsP"
+                                                                >strings</span
+                                                            ><span
+                                                                class="sc-gUjWJS sc-jgraLO itHPsH iUxudT"
+                                                            >
+                                                                (<!-- -->ApiBodyType<!-- -->)
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <span
+                                                                class="sc-gUjWJS itHPsH"
+                                                                >Items<!-- -->
+                                                                <!-- -->Enum<!-- -->:</span
+                                                            >
+                                                            <span
+                                                                class="sc-gUjWJS sc-ldgOGP itHPsH cRxwgg"
+                                                                >&quot;SEDAN&quot;</span
+                                                            >
+                                                            <span
+                                                                class="sc-gUjWJS sc-ldgOGP itHPsH cRxwgg"
+                                                                >&quot;COUPE&quot;</span
+                                                            >
+                                                            <span
+                                                                class="sc-gUjWJS sc-ldgOGP itHPsH cRxwgg"
+                                                                >&quot;CONVERTIBLE&quot;</span
+                                                            >
+                                                            <span
+                                                                class="sc-gUjWJS sc-ldgOGP itHPsH cRxwgg"
+                                                                >&quot;WAGON&quot;</span
+                                                            >
+                                                            <span
+                                                                class="sc-gUjWJS sc-ldgOGP itHPsH cRxwgg"
+                                                                >&quot;HATCHBACK&quot;</span
+                                                            >
+                                                            <span
+                                                                class="sc-gUjWJS sc-ldgOGP itHPsH cRxwgg"
+                                                                >&quot;SUV&quot;</span
+                                                            >
+                                                            <span
+                                                                class="sc-gUjWJS sc-ldgOGP itHPsH cRxwgg"
+                                                                >&quot;TRUCK&quot;</span
+                                                            >
+                                                            <span
+                                                                class="sc-gUjWJS sc-ldgOGP itHPsH cRxwgg"
+                                                                >&quot;VAN&quot;</span
+                                                            >
+                                                        </div>
+                                                        <div>
+                                                            <div
+                                                                html="&lt;p&gt;The body types to filter by&lt;/p&gt;
+"
+                                                                class="sc-iKOmoZ sc-cCzLxZ WVNwY jaVotg"
+                                                            >
+                                                                <p>
+                                                                    The body
+                                                                    types to
+                                                                    filter by
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div>
                                     <h3 class="sc-fYitVF duKVDl">Responses</h3>
@@ -2703,7 +2879,7 @@
                                             class="sc-jYnQyy eIFDdZ http-verb get"
                                             >get</span
                                         ><span class="sc-fYrVWQ gllLir"
-                                            >/car/{slug}</span
+                                            >/cars/{slug}</span
                                         ><svg
                                             class="sc-eTNRI exoGJA"
                                             style="margin-right: -25px"
@@ -2735,7 +2911,7 @@
                                                 <div class="sc-lkDHyp etvaCd">
                                                     <span
                                                         >http://localhost:8080</span
-                                                    >/car/{slug}
+                                                    >/cars/{slug}
                                                 </div>
                                             </div>
                                         </div>
@@ -3441,7 +3617,7 @@
                                                                                                                             >
                                                                                                                                 <span
                                                                                                                                     class="property token string"
-                                                                                                                                    >"fuel_econonmy_city_l_per_100km"</span
+                                                                                                                                    >"fuel_economy_city_l_per_100km"</span
                                                                                                                                 >:
                                                                                                                                 <span
                                                                                                                                     class="token number"
@@ -3735,7 +3911,7 @@
                                                                                                                             >
                                                                                                                                 <span
                                                                                                                                     class="property token string"
-                                                                                                                                    >"fuel_econonmy_city_l_per_100km"</span
+                                                                                                                                    >"fuel_economy_city_l_per_100km"</span
                                                                                                                                 >:
                                                                                                                                 <span
                                                                                                                                     class="token number"
@@ -4904,13 +5080,9 @@
                         ],
                         info: {
                             title: 'CarDB API',
-                            version: '1.0.0',
+                            version: '0.0.1',
                             description:
                                 'API for searching car models, variations, engine options, and specs',
-                            license: {
-                                name: 'MIT',
-                                url: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-                            },
                         },
                         paths: {
                             '/cars': {
@@ -4919,13 +5091,49 @@
                                     description:
                                         'Retrieves a list of car models',
                                     operationId: 'getCars',
+                                    parameters: [
+                                        {
+                                            in: 'query',
+                                            name: 'search',
+                                            schema: { type: 'string' },
+                                            description: 'The search string',
+                                        },
+                                        {
+                                            in: 'query',
+                                            name: 'brandIds',
+                                            schema: {
+                                                type: 'array',
+                                                items: {
+                                                    type: 'string',
+                                                    format: 'uuid',
+                                                },
+                                            },
+                                            description:
+                                                'The ids of the brands to filter by',
+                                        },
+                                        {
+                                            in: 'query',
+                                            name: 'body_types',
+                                            schema: {
+                                                type: 'array',
+                                                items: {
+                                                    $ref: '#/components/schemas/ApiBodyType',
+                                                },
+                                            },
+                                            description:
+                                                'The body types to filter by',
+                                        },
+                                    ],
                                     responses: {
                                         200: {
                                             description: 'Successful response',
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/ListCarsResponse',
+                                                        type: 'array',
+                                                        items: {
+                                                            $ref: '#/components/schemas/ApiCarModel',
+                                                        },
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -4975,7 +5183,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -4994,7 +5202,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5011,7 +5219,7 @@
                                     },
                                 },
                             },
-                            '/car/{slug}': {
+                            '/cars/{slug}': {
                                 get: {
                                     summary: 'Get car',
                                     description: 'Retrieves a single car model',
@@ -5032,7 +5240,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/CarModel',
+                                                        $ref: '#/components/schemas/ApiCarModel',
                                                     },
                                                     examples: {
                                                         skoda_octavia_combi: {
@@ -5081,7 +5289,7 @@
                                                                                     number_of_cylinders: 3,
                                                                                     cylinder_layout:
                                                                                         'INLINE',
-                                                                                    fuel_econonmy_city_l_per_100km: 6,
+                                                                                    fuel_economy_city_l_per_100km: 6,
                                                                                     fuel_economy_highway_l_per_100km: 4.5,
                                                                                     fuel_economy_combined_l_per_100km: 5,
                                                                                     power_kw: 81,
@@ -5103,7 +5311,7 @@
                                                                                     number_of_cylinders: 4,
                                                                                     cylinder_layout:
                                                                                         'INLINE',
-                                                                                    fuel_econonmy_city_l_per_100km: 7,
+                                                                                    fuel_economy_city_l_per_100km: 7,
                                                                                     fuel_economy_highway_l_per_100km: 5,
                                                                                     fuel_economy_combined_l_per_100km: 6,
                                                                                     power_kw: 110,
@@ -5126,7 +5334,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5145,7 +5353,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5164,7 +5372,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5193,7 +5401,10 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/ListBrandsResponse',
+                                                        type: 'array',
+                                                        items: {
+                                                            $ref: '#/components/schemas/ApiCarBrand',
+                                                        },
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5227,7 +5438,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5246,7 +5457,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                 },
                                             },
@@ -5275,7 +5486,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/CarBrand',
+                                                        $ref: '#/components/schemas/ApiCarBrand',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5297,7 +5508,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5316,7 +5527,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5335,7 +5546,7 @@
                                             content: {
                                                 'application/json': {
                                                     schema: {
-                                                        $ref: '#/components/schemas/Error',
+                                                        $ref: '#/components/schemas/ApiError',
                                                     },
                                                     examples: {
                                                         default_example: {
@@ -5355,63 +5566,30 @@
                         },
                         components: {
                             schemas: {
-                                ListCarsResponse: {
+                                ApiCarModel: {
                                     type: 'object',
                                     properties: {
-                                        cars: {
-                                            type: 'array',
-                                            items: {
-                                                type: 'object',
-                                                properties: {
-                                                    id: { type: 'number' },
-                                                    name: { type: 'string' },
-                                                    slug: { type: 'string' },
-                                                    body_type: {
-                                                        $ref: '#/components/schemas/BodyType',
-                                                    },
-                                                    brand: {
-                                                        $ref: '#/components/schemas/CarBrand',
-                                                    },
-                                                },
-                                            },
-                                        },
-                                    },
-                                },
-                                ListBrandsResponse: {
-                                    type: 'object',
-                                    properties: {
-                                        brands: {
-                                            type: 'array',
-                                            items: {
-                                                $ref: '#/components/schemas/CarBrand',
-                                            },
-                                        },
-                                    },
-                                },
-                                CarModel: {
-                                    type: 'object',
-                                    properties: {
-                                        id: { type: 'number' },
+                                        id: { type: 'string', format: 'uuid' },
                                         name: { type: 'string' },
                                         slug: { type: 'string' },
                                         body_type: {
-                                            $ref: '#/components/schemas/BodyType',
+                                            $ref: '#/components/schemas/ApiBodyType',
                                         },
                                         brand: {
-                                            $ref: '#/components/schemas/CarBrand',
+                                            $ref: '#/components/schemas/ApiCarBrand',
                                         },
                                         generations: {
                                             type: 'array',
                                             items: {
-                                                $ref: '#/components/schemas/CarGeneration',
+                                                $ref: '#/components/schemas/ApiCarGeneration',
                                             },
                                         },
                                     },
                                 },
-                                CarGeneration: {
+                                ApiCarGeneration: {
                                     type: 'object',
                                     properties: {
-                                        id: { type: 'integer' },
+                                        id: { type: 'string', format: 'uuid' },
                                         name: { type: 'string' },
                                         production_start_year: {
                                             type: 'integer',
@@ -5432,33 +5610,33 @@
                                         engine_options: {
                                             type: 'array',
                                             items: {
-                                                $ref: '#/components/schemas/EngineOption',
+                                                $ref: '#/components/schemas/ApiEngineOption',
                                             },
                                         },
                                     },
                                 },
-                                EngineOption: {
+                                ApiEngineOption: {
                                     type: 'object',
                                     properties: {
                                         id: { type: 'integer' },
                                         name: { type: 'string' },
                                         fuel_type: {
-                                            $ref: '#/components/schemas/FuelType',
+                                            $ref: '#/components/schemas/ApiFuelType',
                                         },
                                         drive_type: {
-                                            $ref: '#/components/schemas/DriveType',
+                                            $ref: '#/components/schemas/ApiDriveType',
                                         },
                                         transmission_type: {
-                                            $ref: '#/components/schemas/TransmissionType',
+                                            $ref: '#/components/schemas/ApiTransmissionType',
                                         },
                                         number_of_gears: { type: 'integer' },
                                         number_of_cylinders: {
                                             type: 'integer',
                                         },
                                         cylinder_layout: {
-                                            $ref: '#/components/schemas/CylinderLayout',
+                                            $ref: '#/components/schemas/ApiCylinderLayout',
                                         },
-                                        fuel_econonmy_city_l_per_100km: {
+                                        fuel_economy_city_l_per_100km: {
                                             type: 'number',
                                         },
                                         fuel_economy_highway_l_per_100km: {
@@ -5476,17 +5654,17 @@
                                         },
                                     },
                                 },
-                                CarBrand: {
+                                ApiCarBrand: {
                                     type: 'object',
                                     properties: {
-                                        id: { type: 'integer' },
+                                        id: { type: 'string', format: 'uuid' },
                                         name: { type: 'string' },
                                         origin_country: { type: 'string' },
                                         website: { type: 'string' },
                                         slug: { type: 'string' },
                                     },
                                 },
-                                BodyType: {
+                                ApiBodyType: {
                                     type: 'string',
                                     enum: [
                                         'SEDAN',
@@ -5499,7 +5677,7 @@
                                         'VAN',
                                     ],
                                 },
-                                FuelType: {
+                                ApiFuelType: {
                                     type: 'string',
                                     enum: [
                                         'PETROL',
@@ -5510,15 +5688,15 @@
                                         'HYDROGEN',
                                     ],
                                 },
-                                DriveType: {
+                                ApiDriveType: {
                                     type: 'string',
                                     enum: ['FWD', 'RWD', 'AWD'],
                                 },
-                                TransmissionType: {
+                                ApiTransmissionType: {
                                     type: 'string',
                                     enum: ['MANUAL', 'AUTOMATIC', 'CVT', 'DCT'],
                                 },
-                                CylinderLayout: {
+                                ApiCylinderLayout: {
                                     type: 'string',
                                     enum: [
                                         'INLINE',
@@ -5529,7 +5707,7 @@
                                         'HYDROGEN',
                                     ],
                                 },
-                                Error: {
+                                ApiError: {
                                     type: 'object',
                                     properties: {
                                         statusCode: { type: 'integer' },
@@ -5604,7 +5782,7 @@
                                 },
                             ],
                             [
-                                'car/{slug',
+                                'cars/{slug',
                                 {
                                     _index: 5,
                                     title: {},
