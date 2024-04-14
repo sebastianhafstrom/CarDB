@@ -2,7 +2,9 @@ package com.cardb.carsearch.service;
 
 import com.cardb.carsearch.api.data.ApiBodyType;
 import com.cardb.carsearch.api.data.ApiCarModel;
+import com.cardb.carsearch.api.data.ApiCreateCarModel;
 import com.cardb.carsearch.data.constants.BodyType;
+import com.cardb.carsearch.data.entity.Brand;
 import com.cardb.carsearch.data.entity.CarModel;
 import com.cardb.carsearch.data.repository.CarModelRepository;
 import com.cardb.carsearch.specification.CarModelSpecifications;
@@ -18,9 +20,11 @@ import java.util.stream.Collectors;
 public class CarModelService {
 
     private final CarModelRepository carModelRepository;
+    private final BrandService brandService;
 
-    public CarModelService(CarModelRepository carModelRepository) {
+    public CarModelService(CarModelRepository carModelRepository, BrandService brandService) {
         this.carModelRepository = carModelRepository;
+        this.brandService = brandService;
     }
 
     public List<ApiCarModel> getAll(String search, List<UUID> brandIds, List<ApiBodyType> bodyTypes) {
@@ -48,6 +52,13 @@ public class CarModelService {
 
     public ApiCarModel getBySlug(String slug) {
         CarModel carModel = carModelRepository.findBySlug(slug).orElseThrow(EntityNotFoundException::new);
+        return Utils.mapToApi(carModel);
+    }
+
+    public ApiCarModel create(ApiCreateCarModel apiCreateCarModel) {
+        Brand brand = brandService.getByIdEntity(apiCreateCarModel.getBrandId());
+        CarModel carModel = new CarModel(apiCreateCarModel.getName(), apiCreateCarModel.getSlug(), Utils.mapToEntity(apiCreateCarModel.getBodyType()), brand);
+        carModelRepository.save(carModel);
         return Utils.mapToApi(carModel);
     }
 }

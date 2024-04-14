@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface CarModelRepository extends JpaRepository<CarModel, Long>, JpaSpecificationExecutor<CarModel> {
+public interface CarModelRepository extends JpaRepository<CarModel, UUID>, JpaSpecificationExecutor<CarModel> {
     Optional<CarModel> findBySlug(String slug);
 }

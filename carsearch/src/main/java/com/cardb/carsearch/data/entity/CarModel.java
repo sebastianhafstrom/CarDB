@@ -45,6 +45,13 @@ public class CarModel extends BaseEntity {
         return generations;
     }
 
+    public CarModel(String name, String slug, BodyType bodyType, Brand brand) {
+        this.name = name;
+        this.slug = slug;
+        this.bodyType = bodyType;
+        this.brand = brand;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

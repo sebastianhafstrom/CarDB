@@ -9,6 +9,7 @@ import com.cardb.carsearch.data.entity.Brand;
 import com.cardb.carsearch.data.entity.CarGeneration;
 import com.cardb.carsearch.data.entity.CarModel;
 
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -29,7 +30,7 @@ public class Utils {
                 .slug(carModel.getSlug())
                 .brand(mapToApi(carModel.getBrand()))
                 .bodyType(mapToApi(carModel.getBodyType()))
-                .generations(carModel.getGenerations().stream().map(Utils::mapToApi).collect(Collectors.toList()));
+                .generations(carModel.getGenerations() != null ? carModel.getGenerations().stream().map(Utils::mapToApi).collect(Collectors.toList()) : Collections.emptyList());
     }
 
     public static ApiBodyType mapToApi(BodyType bodyType) {

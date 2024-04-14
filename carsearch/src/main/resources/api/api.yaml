@@ -89,6 +89,59 @@ paths:
                                     value:
                                         statusCode: 401
                                         message: 'Unauthorized'
+        post:
+            summary: Create car
+            description: Creates a new car model
+            operationId: createCar
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ApiCreateCarModel'
+            responses:
+                '201':
+                    description: Car created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiCarModel'
+                            examples:
+                                default_example:
+                                    value:
+                                        id: 1
+                                        name: 'Audi A4'
+                                        slug: 'audi-a4'
+                                        body_type: 'SEDAN'
+                                        brand:
+                                            id: 1
+                                            name: 'Audi'
+                                            slug: 'audi'
+                                            origin_country: 'Germany'
+                                            website: 'https://www.audi.com'
+                '400':
+                    description: Bad request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiError'
+                            examples:
+                                default_example:
+                                    value:
+                                        statusCode: 400
+                                        message: 'Bad request'
+                '401':
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiError'
+                            examples:
+                                default_example:
+                                    value:
+                                        statusCode: 401
+                                        message: 'Unauthorized'
+
     /cars/{slug}:
         get:
             summary: Get car
@@ -244,6 +297,53 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/ApiError'
+        post:
+            summary: Create car brand
+            description: Creates a new car brand
+            operationId: createBrand
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ApiCreateCarBrand'
+            responses:
+                '201':
+                    description: Brand created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiCarBrand'
+                            examples:
+                                default_example:
+                                    value:
+                                        id: 1
+                                        name: 'Audi'
+                                        origin_country: 'Germany'
+                                        website: 'https://www.audi.com'
+                                        slug: 'audi'
+                '400':
+                    description: Bad request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiError'
+                            examples:
+                                default_example:
+                                    value:
+                                        statusCode: 400
+                                        message: 'Bad request'
+                '401':
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiError'
+                            examples:
+                                default_example:
+                                    value:
+                                        statusCode: 401
+                                        message: 'Unauthorized'
     /brands/{slug}:
         get:
             summary: Get car brand
@@ -324,6 +424,19 @@ components:
                     items:
                         $ref: '#/components/schemas/ApiCarGeneration'
 
+        ApiCreateCarModel:
+            type: object
+            properties:
+                name:
+                    type: string
+                body_type:
+                    $ref: '#/components/schemas/ApiBodyType'
+                brand_id:
+                    type: string
+                    format: uuid
+                slug:
+                    type: string
+
         ApiCarGeneration:
             type: object
             properties:
@@ -398,6 +511,18 @@ components:
                 id:
                     type: string
                     format: uuid
+                name:
+                    type: string
+                origin_country:
+                    type: string
+                website:
+                    type: string
+                slug:
+                    type: string
+
+        ApiCreateCarBrand:
+            type: object
+            properties:
                 name:
                     type: string
                 origin_country:
