@@ -175,50 +175,6 @@ paths:
                                             slug: 'skoda'
                                             origin_country: 'Czech Republic'
                                             website: 'https://www.skoda-auto.com'
-                                        generations:
-                                            - id: 1
-                                              name: 'Skoda Octavia Combi 2019 - 2024'
-                                              production_start_year: 2019
-                                              production_end_year: 2024
-                                              tire_size: '205/55 R16'
-                                              length_mm: 4689
-                                              width_mm: 1829
-                                              height_mm: 1468
-                                              ground_clearance_mm: 78
-                                              cargo_volume_litres: 640
-                                              engine_options:
-                                                - id: 1
-                                                  name: '1.0 TSI'
-                                                  fuel_type: 'PETROL'
-                                                  drive_type: 'FWD'
-                                                  transmission_type: 'MANUAL'
-                                                  number_of_gears: 6
-                                                  number_of_cylinders: 3
-                                                  cylinder_layout: 'INLINE'
-                                                  fuel_economy_city_l_per_100km: 6.0
-                                                  fuel_economy_highway_l_per_100km: 4.5
-                                                  fuel_economy_combined_l_per_100km: 5.0
-                                                  power_kw: 81
-                                                  power_hp: 110
-                                                  power_bhp: 109
-                                                  top_speed_kph: 202
-                                                  acceleration_0_100_kph: 10.6
-                                                - id: 2
-                                                  name: '1.5 TSI'
-                                                  fuel_type: 'PETROL'
-                                                  drive_type: 'FWD'
-                                                  transmission_type: 'MANUAL'
-                                                  number_of_gears: 6
-                                                  number_of_cylinders: 4
-                                                  cylinder_layout: 'INLINE'
-                                                  fuel_economy_city_l_per_100km: 7.0
-                                                  fuel_economy_highway_l_per_100km: 5.0
-                                                  fuel_economy_combined_l_per_100km: 6.0
-                                                  power_kw: 110
-                                                  power_hp: 150
-                                                  power_bhp: 148
-                                                  top_speed_kph: 220
-                                                  acceleration_0_100_kph: 8.4
                                                 
 
                 '400':
@@ -254,6 +210,81 @@ paths:
                                     value:
                                         statusCode: 404
                                         message: 'Car model not found'
+
+    /cars/{slug}/generations:
+        get:
+            summary: Get car generations
+            description: Retrieves a list of car generations
+            operationId: getGenerations
+            parameters:
+                - name: slug
+                  in: path
+                  description: Slug of the car model to retrieve generations for
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: Successful response
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/ApiCarGeneration'
+                            examples:
+                                default_example:
+                                    value:
+                                        generations:
+                                            - id: 1
+                                              name: 'Skoda Octavia Combi 2019 - 2024'
+                                              production_start_year: 2019
+                                              production_end_year: 2024
+                                              tire_size: '205/55 R16'
+                                              length_mm: 4689
+                                              width_mm: 1829
+                                              height_mm: 1468
+                                              ground_clearance_mm: 78
+                                              cargo_volume_litres: 640
+
+        post:
+            summary: Create car generation
+            description: Creates a new car generation
+            operationId: createGeneration
+            parameters:
+                - name: slug
+                  in: path
+                  description: Slug of the car model to create a generation for
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ApiCreateCarGeneration'
+            responses:
+                '201':
+                    description: Generation created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiCarGeneration'
+                            examples:
+                                default_example:
+                                    value:
+                                        id: 1
+                                        name: 'Skoda Octavia Combi 2019 - 2024'
+                                        production_start_year: 2019
+                                        production_end_year: 2024
+                                        tire_size: '205/55 R16'
+                                        length_mm: 4689
+                                        width_mm: 1829
+                                        height_mm: 1468
+                                        ground_clearance_mm: 78
+                                        cargo_volume_litres: 640
+
     /brands:
         get:
             summary: Get car brands
@@ -419,10 +450,6 @@ components:
                     $ref: '#/components/schemas/ApiBodyType'
                 brand:
                     $ref: '#/components/schemas/ApiCarBrand'
-                generations:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/ApiCarGeneration'
 
         ApiCreateCarModel:
             type: object
@@ -463,10 +490,29 @@ components:
                     type: integer
                 cargo_volume_litres:
                     type: integer
-                engine_options:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/ApiEngineOption'
+                # Add weight
+
+        ApiCreateCarGeneration:
+            type: object
+            properties:
+                name:
+                    type: string
+                production_start_year:
+                    type: integer
+                production_end_year:
+                    type: integer
+                tire_size:
+                    type: string
+                length_mm:
+                    type: integer
+                width_mm:
+                    type: integer
+                height_mm:
+                    type: integer
+                ground_clearance_mm:
+                    type: integer
+                cargo_volume_litres:
+                    type: integer
                 # Add weight
 
         ApiEngineOption:

@@ -1,8 +1,6 @@
 package com.cardb.carsearch.api;
 
-import com.cardb.carsearch.api.data.ApiBodyType;
-import com.cardb.carsearch.api.data.ApiCarModel;
-import com.cardb.carsearch.api.data.ApiCreateCarModel;
+import com.cardb.carsearch.api.data.*;
 import com.cardb.carsearch.service.CarModelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +33,15 @@ public class CarModelController implements CarsApi {
     @Override
     public ResponseEntity<ApiCarModel> createCar(ApiCreateCarModel apiCreateCarModel) {
         return ResponseEntity.status(HttpStatus.CREATED).body(carModelService.create(apiCreateCarModel));
+    }
+
+    @Override
+    public ResponseEntity<ApiCarGeneration> createGeneration(String slug, ApiCreateCarGeneration apiCreateCarGeneration) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(carModelService.createCarGeneration(slug, apiCreateCarGeneration));
+    }
+
+    @Override
+    public ResponseEntity<List<ApiCarGeneration>> getGenerations(String slug) {
+        return ResponseEntity.ok(carModelService.getCarGenerations(slug));
     }
 }

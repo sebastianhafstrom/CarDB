@@ -19,6 +19,7 @@ import { Route as CarsNewImport } from './routes/cars_.new'
 import { Route as CarsCarSlugImport } from './routes/cars_.$carSlug'
 import { Route as BrandsNewImport } from './routes/brands_.new'
 import { Route as BrandsBrandSlugImport } from './routes/brands_.$brandSlug'
+import { Route as CarsCarSlugGenerationsNewImport } from './routes/cars_.$carSlug_.generations_.new'
 
 // Create Virtual Routes
 
@@ -61,6 +62,11 @@ const BrandsBrandSlugRoute = BrandsBrandSlugImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const CarsCarSlugGenerationsNewRoute = CarsCarSlugGenerationsNewImport.update({
+  path: '/cars/$carSlug/generations/new',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -93,6 +99,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CarsNewImport
       parentRoute: typeof rootRoute
     }
+    '/cars/$carSlug/generations/new': {
+      preLoaderRoute: typeof CarsCarSlugGenerationsNewImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -106,6 +116,7 @@ export const routeTree = rootRoute.addChildren([
   BrandsNewRoute,
   CarsCarSlugRoute,
   CarsNewRoute,
+  CarsCarSlugGenerationsNewRoute,
 ])
 
 /* prettier-ignore-end */

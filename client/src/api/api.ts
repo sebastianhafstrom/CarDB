@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { brand, car, createBrandRequest, createCarRequest } from './apiTypes';
+import {
+    brand,
+    car,
+    carGeneration,
+    createBrandRequest,
+    createCarGenerationRequest,
+    createCarRequest,
+} from './apiTypes';
 
 export async function fetchBrands(): Promise<brand[]> {
     const response = await axios.get<brand[]>('http://localhost:8080/brands');
@@ -35,5 +42,23 @@ export async function fetchCarBySlug(slug: string) {
 
 export async function createCar(data: createCarRequest) {
     const response = await axios.post<car>('http://localhost:8080/cars', data);
+    return response.data;
+}
+
+export async function fetchCarGenerations(carSlug: string) {
+    const response = await axios.get<carGeneration[]>(
+        `http://localhost:8080/cars/${carSlug}/generations`
+    );
+    return response.data;
+}
+
+export async function createCarGeneration(
+    carSlug: string,
+    data: createCarGenerationRequest
+) {
+    const response = await axios.post<carGeneration>(
+        `http://localhost:8080/cars/${carSlug}/generations`,
+        data
+    );
     return response.data;
 }

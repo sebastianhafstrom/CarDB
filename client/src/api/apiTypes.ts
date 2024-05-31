@@ -28,3 +28,28 @@ export type createCarRequest = {
     brand_id: string;
     body_type: string;
 };
+
+export type carGeneration = {
+    id: string;
+    name: string;
+    production_start_year: number;
+    production_end_year: number | null;
+    tire_size: string;
+    length_mm: number;
+    width_mm: number;
+    height_mm: number;
+    ground_clearance_mm: number;
+    cargo_volume_litres: number;
+};
+
+export type createCarGenerationRequest = {
+    name: string;
+    production_start_year: number;
+    production_end_year: number | null;
+    tire_size: string;
+    length_mm: number;
+    width_mm: number;
+    height_mm: number;
+    ground_clearance_mm: number;
+    cargo_volume_litres: number;
+};

@@ -20,7 +20,7 @@ public class CarModel extends BaseEntity {
     @ManyToOne
     private Brand brand;
 
-    @OneToMany(mappedBy = "model", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "carModel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CarGeneration> generations;
 
     protected CarModel() {}

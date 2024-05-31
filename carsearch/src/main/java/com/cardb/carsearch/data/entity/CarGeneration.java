@@ -12,7 +12,7 @@ public class CarGeneration extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "model_id")
-    private CarModel model;
+    private CarModel carModel;
 
     private Integer productionStartYear;
 
@@ -33,12 +33,25 @@ public class CarGeneration extends BaseEntity {
     protected CarGeneration() {
     }
 
+    public CarGeneration(String name, CarModel carModel, Integer productionStartYear, Integer productionEndYear, String tireSize, Integer length, Integer width, Integer height, Integer groundClearance, Integer cargoVolume) {
+        this.name = name;
+        this.carModel = carModel;
+        this.productionStartYear = productionStartYear;
+        this.productionEndYear = productionEndYear;
+        this.tireSize = tireSize;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.groundClearance = groundClearance;
+        this.cargoVolume = cargoVolume;
+    }
+
     public String getName() {
         return name;
     }
 
-    public CarModel getModel() {
-        return model;
+    public CarModel getCarModel() {
+        return carModel;
     }
 
     public Integer getProductionStartYear() {
@@ -79,19 +92,19 @@ public class CarGeneration extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         CarGeneration that = (CarGeneration) o;
-        return Objects.equals(name, that.name) && Objects.equals(model, that.model) && Objects.equals(productionStartYear, that.productionStartYear) && Objects.equals(productionEndYear, that.productionEndYear) && Objects.equals(tireSize, that.tireSize) && Objects.equals(length, that.length) && Objects.equals(width, that.width) && Objects.equals(height, that.height) && Objects.equals(groundClearance, that.groundClearance) && Objects.equals(cargoVolume, that.cargoVolume);
+        return Objects.equals(name, that.name) && Objects.equals(carModel, that.carModel) && Objects.equals(productionStartYear, that.productionStartYear) && Objects.equals(productionEndYear, that.productionEndYear) && Objects.equals(tireSize, that.tireSize) && Objects.equals(length, that.length) && Objects.equals(width, that.width) && Objects.equals(height, that.height) && Objects.equals(groundClearance, that.groundClearance) && Objects.equals(cargoVolume, that.cargoVolume);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, model, productionStartYear, productionEndYear, tireSize, length, width, height, groundClearance, cargoVolume);
+        return Objects.hash(super.hashCode(), name, carModel, productionStartYear, productionEndYear, tireSize, length, width, height, groundClearance, cargoVolume);
     }
 
     @Override
     public String toString() {
         return "CarGeneration{" +
                 "name='" + name + '\'' +
-                ", model=" + model +
+                ", model=" + carModel +
                 ", productionStartYear=" + productionStartYear +
                 ", productionEndYear=" + productionEndYear +
                 ", tireSize='" + tireSize + '\'' +

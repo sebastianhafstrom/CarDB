@@ -1,5 +1,6 @@
 {
     "yaml.schemas": {
         "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json": "file:///Users/sebastian/Code/private/cardb/car-api.yaml"
-    }
+    },
+    "java.compile.nullAnalysis.mode": "disabled"
 }

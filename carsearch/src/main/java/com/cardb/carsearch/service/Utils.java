@@ -29,8 +29,7 @@ public class Utils {
                 .name(carModel.getName())
                 .slug(carModel.getSlug())
                 .brand(mapToApi(carModel.getBrand()))
-                .bodyType(mapToApi(carModel.getBodyType()))
-                .generations(carModel.getGenerations() != null ? carModel.getGenerations().stream().map(Utils::mapToApi).collect(Collectors.toList()) : Collections.emptyList());
+                .bodyType(mapToApi(carModel.getBodyType()));
     }
 
     public static ApiBodyType mapToApi(BodyType bodyType) {
@@ -49,6 +48,7 @@ public class Utils {
                 .productionEndYear(carGeneration.getProductionEndYear())
                 .tireSize(carGeneration.getTireSize())
                 .lengthMm(carGeneration.getLength())
+                .widthMm(carGeneration.getWidth())
                 .heightMm(carGeneration.getHeight())
                 .groundClearanceMm(carGeneration.getGroundClearance())
                 .cargoVolumeLitres(carGeneration.getCargoVolume());
