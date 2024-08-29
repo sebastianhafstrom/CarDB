@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "ts-node src/index.ts",
-    "typeorm": "typeorm-ts-node-commonjs",
+    "dbclear": "typeorm-ts-node-commonjs schema:drop -d ./src/data-source.ts",
     "dev": "nodemon src/index.ts"
   }
 }

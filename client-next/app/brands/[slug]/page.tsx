@@ -18,15 +18,14 @@ export default function BrandPage() {
     return (
       <>
         <h1 className="text-4xl font-bold">{brand.name}</h1>
-        <div>Origin Country: {brand.country}</div>
+        <div>{brand.country}</div>
         <div>
-          Website:
           <a href={brand.website} target="_blank" rel="noreferrer">
             {brand.website}
           </a>
         </div>
 
-        <h2 className="text-3xl font-bold pb-4">Cars from {brand.name}</h2>
+        <h2 className="mt-4 text-3xl font-bold pb-4">Models</h2>
         <DataTable columns={columns} data={brand.models} />
       </>
     );

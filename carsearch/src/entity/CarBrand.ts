@@ -1,9 +1,9 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
   BaseEntity,
+  Column,
+  Entity,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { CarModel } from "./CarModel";
 
@@ -24,7 +24,9 @@ export class CarBrand extends BaseEntity {
   @Column()
   website: string;
 
-  @OneToMany(() => CarModel, (carModel) => carModel.brand)
+  @OneToMany(() => CarModel, (carModel) => carModel.brand, {
+    onDelete: "CASCADE",
+  })
   models: CarModel[];
 
   // Add more columns as needed

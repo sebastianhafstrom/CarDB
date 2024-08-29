@@ -1,14 +1,12 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
   BaseEntity,
-  OneToMany,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
-import { CarBrand } from "./CarBrand";
-import { CarGeneration } from "./CarGeneration";
 import { BodyType } from "../types";
+import { CarBrand } from "./CarBrand";
 
 @Entity()
 export class CarModel extends BaseEntity {
@@ -22,11 +20,16 @@ export class CarModel extends BaseEntity {
   slug: string;
 
   @Column()
+  website: string;
+
+  @Column()
+  imageUrl: string;
+
+  @Column()
   bodyType: BodyType;
 
-  @ManyToOne(() => CarBrand, (carBrand) => carBrand.models)
+  @ManyToOne(() => CarBrand, (carBrand) => carBrand.models, {
+    onDelete: "CASCADE",
+  })
   brand: CarBrand;
-
-  @OneToMany(() => CarGeneration, (carGeneration) => carGeneration.model)
-  generations: CarGeneration[];
 }
