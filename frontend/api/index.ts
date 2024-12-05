@@ -1,8 +1,10 @@
 import { brand, car } from "@/types/types";
 import axios from "axios";
 
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 export const api = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: apiUrl,
 });
 
 export const getCarModels = async (
