@@ -11,7 +11,7 @@ require("dotenv").config();
 
 const coreConfig = {
   origin: [process.env.FRONTEND_URL],
-  methods: ["GET"],
+  methods: ["GET", "OPTIONS"],
   allowedHeaders: ["x-api-key"],
 };
 
