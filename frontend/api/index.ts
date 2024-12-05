@@ -1,10 +1,9 @@
 import { brand, car } from "@/types/types";
 import axios from "axios";
 
-const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-
 export const api = axios.create({
-  baseURL: apiUrl,
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
+  headers: { "x-api-key": process.env.NEXT_PUBLIC_BACKEND_API_KEY },
 });
 
 export const getCarModels = async (

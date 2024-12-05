@@ -18,9 +18,6 @@ router.get("/models", async (req: Request, res: Response) => {
     bodyTypes = bodyTypes.split(",");
   }
 
-  console.log("search", search);
-  console.log("bodyTypes", bodyTypes);
-
   try {
     const carModels = await CarModel.find({
       relations: {

@@ -12,7 +12,6 @@ export const importData = async () => {
     carBrand.country = brand.country;
     carBrand.website = brand.website;
     await carBrand.save();
-    console.log(`Created brand: ${brand.name}`);
   }
 
   for (const model of models) {
@@ -25,6 +24,5 @@ export const importData = async () => {
     carModel.bodyType = model.bodyType as BodyType;
     carModel.brand = brand;
     await carModel.save();
-    console.log(`Created model: ${model.name}`);
   }
 };

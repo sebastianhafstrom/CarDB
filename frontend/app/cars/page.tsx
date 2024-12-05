@@ -2,7 +2,6 @@
 import { getCarModels } from "@/api";
 import CarCard from "@/components/car-card";
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/ui/data-table";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -11,7 +10,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { BodyType, car } from "@/types/types";
-import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -92,41 +90,7 @@ export default function Page() {
             </Link>
           ))}
         </div>
-
-        <DataTable columns={columns} data={cars} />
       </>
     );
   }
 }
-
-const columns: ColumnDef<car>[] = [
-  {
-    accessorKey: "name",
-    header: "Name",
-    cell: ({ row }) => {
-      return (
-        <Link href={`/cars/${row.original.slug}`} className="font-medium">
-          {row.original.name}
-        </Link>
-      );
-    },
-  },
-  {
-    accessorKey: "brand",
-    header: "Brand",
-    cell: ({ row }) => {
-      return (
-        <Link
-          href={`/brands/${row.original.brand.slug}`}
-          className="font-medium"
-        >
-          {row.original.brand.name}
-        </Link>
-      );
-    },
-  },
-  {
-    accessorKey: "bodyType",
-    header: "Body Type",
-  },
-];
