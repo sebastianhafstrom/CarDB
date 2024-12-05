@@ -1,17 +1,24 @@
 "use client";
-import { fetcher } from "@/api";
+import { getCarModel } from "@/api";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { car } from "@/types/types";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import useSWR from "swr";
+import { useEffect, useState } from "react";
 
 export default function CarPage() {
   const { slug } = useParams();
 
-  const { data: car } = useSWR<car>(`/models/${slug}`, fetcher);
+  const [car, setCar] = useState<car | null>(null);
 
-  // Fetch the car brand data based on the slug
+  const fetchCar = async () => {
+    const response = await getCarModel(slug as string);
+    setCar(response);
+  };
+
+  useEffect(() => {
+    fetchCar();
+  }, [slug]);
 
   if (car) {
     return (

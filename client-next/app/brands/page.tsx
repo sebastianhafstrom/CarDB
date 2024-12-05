@@ -1,17 +1,22 @@
 "use client";
-import { fetcher } from "@/api";
+import { getBrands } from "@/api";
 import { DataTable } from "@/components/ui/data-table";
 import { brand } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import useSWR from "swr";
+import { useEffect, useState } from "react";
 
 export default function Page() {
-  const {
-    data: brands,
-    error,
-    isLoading,
-  } = useSWR<brand[]>("/brands", fetcher);
+  const [brands, setBrands] = useState<brand[] | null>(null);
+
+  const fetchBrands = async () => {
+    const response = await getBrands();
+    setBrands(response);
+  };
+
+  useEffect(() => {
+    fetchBrands();
+  }, []);
 
   if (brands) {
     return (
@@ -31,11 +36,8 @@ const columns: ColumnDef<brand>[] = [
     header: "Name",
     cell: ({ row }) => {
       return (
-        <Link
-          href={`/brands/${row.getValue<string>("slug")}`}
-          className="font-medium"
-        >
-          {row.getValue<string>("name")}
+        <Link href={`/brands/${row.original.slug}`} className="font-medium">
+          {row.original.name}
         </Link>
       );
     },
@@ -49,18 +51,10 @@ const columns: ColumnDef<brand>[] = [
     header: "Website",
     cell: ({ row }) => {
       return (
-        <a
-          href={row.getValue<string>("website")}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {row.getValue<string>("website")}
+        <a href={row.original.website} target="_blank" rel="noreferrer">
+          {row.original.website}
         </a>
       );
     },
-  },
-  {
-    accessorKey: "slug",
-    header: "Slug",
   },
 ];

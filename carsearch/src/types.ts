@@ -1,13 +1,14 @@
 export enum BodyType {
-  Sedan = "sedan",
-  SUV = "suv",
-  Hatchback = "hatchback",
-  Wagon = "wagon",
-  Coupe = "coupe",
-  Convertible = "convertible",
-  Pickup = "pickup",
-  Van = "van",
-  Truck = "truck",
+  SEDAN = "SEDAN",
+  SUV = "SUV",
+  CROSSOVER = "CROSSOVER",
+  HATCHBACK = "HATCHBACK",
+  WAGON = "WAGON",
+  COUPE = "COUPE",
+  CONVERTIBLE = "CONVERTIBLE",
+  PICKUP = "PICKUP",
+  VAN = "VAN",
+  CABRIOLET = "CABRIOLET",
 }
 
 export enum FuelType {

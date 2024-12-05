@@ -59,4 +59,10 @@ export const carBrandsToImport = [
     website: "https://www.skoda.se/",
     country: "Czech Republic",
   },
+  {
+    name: "Kia",
+    slug: "kia",
+    website: "https://www.kia.com/se/",
+    country: "South Korea",
+  },
 ];

@@ -1,18 +1,25 @@
 "use client";
-import { fetcher } from "@/api";
+import { getBrand } from "@/api";
 import { DataTable } from "@/components/ui/data-table";
 import { brand, car } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import useSWR from "swr";
+import { useEffect, useState } from "react";
 
 export default function BrandPage() {
   const { slug } = useParams();
 
-  const { data: brand } = useSWR<brand>(`/brands/${slug}`, fetcher);
+  const [brand, setBrand] = useState<brand | null>(null);
 
-  // Fetch the car brand data based on the slug
+  const fetchBrand = async () => {
+    const response = await getBrand(slug as string);
+    setBrand(response);
+  };
+
+  useEffect(() => {
+    fetchBrand();
+  }, [slug]);
 
   if (brand) {
     return (
@@ -25,7 +32,9 @@ export default function BrandPage() {
           </a>
         </div>
 
-        <h2 className="mt-4 text-3xl font-bold pb-4">Models</h2>
+        <h2 className="mt-4 text-3xl font-bold pb-4">
+          Models ({brand.models.length})
+        </h2>
         <DataTable columns={columns} data={brand.models} />
       </>
     );
@@ -38,11 +47,8 @@ const columns: ColumnDef<car>[] = [
     header: "Name",
     cell: ({ row }) => {
       return (
-        <Link
-          href={`/cars/${row.getValue<string>("slug")}`}
-          className="font-medium"
-        >
-          {row.getValue<string>("name")}
+        <Link href={`/cars/${row.original.slug}`} className="font-medium">
+          {row.original.name}
         </Link>
       );
     },
@@ -50,9 +56,5 @@ const columns: ColumnDef<car>[] = [
   {
     accessorKey: "bodyType",
     header: "Body Type",
-  },
-  {
-    accessorKey: "slug",
-    header: "Slug",
   },
 ];
