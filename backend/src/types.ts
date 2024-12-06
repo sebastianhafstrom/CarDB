@@ -12,27 +12,9 @@ export enum BodyType {
 }
 
 export enum FuelType {
-  Gasoline = "gasoline",
-  Diesel = "diesel",
-  Electric = "electric",
-  Hybrid = "hybrid",
-  Hydrogen = "hydrogen",
-}
-
-export enum DriveType {
-  FrontWheelDrive = "fwd",
-  RearWheelDrive = "rwd",
-  AllWheelDrive = "awd",
-  FourWheelDrive = "4wd",
-}
-
-export enum Transmission {
-  Manual = "manual",
-  Automatic = "automatic",
-}
-
-export enum CylinderLayout {
-  Inline = "inline",
-  V = "v",
-  Flat = "flat",
+  PETROL = "petrol",
+  DIESEL = "diesel",
+  ELECTRIC = "electric",
+  HYBRID = "hybrid",
+  PHEV = "phev",
 }

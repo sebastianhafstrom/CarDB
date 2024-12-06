@@ -3,15 +3,17 @@ import {
   Column,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  OneToMany,
+  PrimaryColumn,
 } from "typeorm";
 import { BodyType } from "../types";
 import { CarBrand } from "./CarBrand";
+import { CarModelVariant } from "./CarModelVariant";
 
 @Entity()
 export class CarModel extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn("uuid")
+  id: string;
 
   @Column()
   name: string;
@@ -28,8 +30,11 @@ export class CarModel extends BaseEntity {
   @Column()
   bodyType: BodyType;
 
-  @ManyToOne(() => CarBrand, (carBrand) => carBrand.models, {
+  @ManyToOne(() => CarBrand, {
     onDelete: "CASCADE",
   })
   brand: CarBrand;
+
+  @OneToMany(() => CarModelVariant, (variant) => variant.model)
+  variants: CarModelVariant[];
 }

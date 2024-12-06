@@ -1,16 +1,10 @@
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { CarModel } from "./CarModel";
 
 @Entity()
 export class CarBrand extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn("uuid")
+  id: string;
 
   @Column()
   slug: string;
@@ -28,8 +22,4 @@ export class CarBrand extends BaseEntity {
     onDelete: "CASCADE",
   })
   models: CarModel[];
-
-  // Add more columns as needed
-
-  // Add relationships with other entities if necessary
 }
