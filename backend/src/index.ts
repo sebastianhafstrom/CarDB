@@ -11,7 +11,7 @@ require("dotenv").config();
 
 const coreConfig = {
   origin: [process.env.FRONTEND_URL],
-  methods: ["*"],
+  methods: ["GET", "OPTIONS"],
   allowedHeaders: ["x-api-key"],
 };
 
@@ -39,7 +39,7 @@ AppDataSource.initialize()
     // ...
 
     // start express server
-    const PORT = process.env.PORT || 4000;
+    const PORT = 4000;
     app.listen(PORT);
 
     await importData();
@@ -50,6 +50,6 @@ AppDataSource.initialize()
       console.log(`Running in ${process.env.NODE_ENV || "development"} mode`);
     }
 
-    console.log(`Express server has started and is listening on port ${PORT}`);
+    console.log(`Express server has started`);
   })
   .catch((error) => console.log(error));
