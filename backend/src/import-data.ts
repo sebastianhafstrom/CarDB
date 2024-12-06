@@ -7,7 +7,6 @@ import { CarBrand } from "./entity/CarBrand";
 import { CarEngine } from "./entity/CarEngine";
 import { CarModel } from "./entity/CarModel";
 import { CarModelVariant } from "./entity/CarModelVariant";
-const { v4: uuidv4 } = require("uuid");
 
 export const importData = async () => {
   for (const brand of carBrandsToImport) {

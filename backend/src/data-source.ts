@@ -5,13 +5,11 @@ import { CarEngine } from "./entity/CarEngine";
 import { CarModel } from "./entity/CarModel";
 import { CarModelVariant } from "./entity/CarModelVariant";
 
+require("dotenv").config();
+
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
-  port: 5433,
-  username: "postgres",
-  password: "password",
-  database: "cardb",
+  url: process.env.DATABASE_URL,
   synchronize: true,
   dropSchema: true,
   logging: false,
@@ -19,13 +17,3 @@ export const AppDataSource = new DataSource({
   migrations: [],
   subscribers: [],
 });
-/* export const AppDataSource = new DataSource({
-  type: "sqlite",
-  database: "cardb.sqlite",
-  synchronize: true,
-  logging: false,
-  entities: [CarBrand, CarModel, CarModelVariant, Engine],
-  migrations: [],
-  subscribers: [],
-  dropSchema: true,
-}); */

@@ -39,11 +39,17 @@ AppDataSource.initialize()
     // ...
 
     // start express server
-    const PORT = 4000;
+    const PORT = process.env.PORT || 4000;
     app.listen(PORT);
 
     await importData();
 
-    console.log(`Express server has started`);
+    if (process.env.NODE_ENV === "production") {
+      console.log("Running in production mode");
+    } else {
+      console.log(`Running in ${process.env.NODE_ENV || "development"} mode`);
+    }
+
+    console.log(`Express server has started and is listening on port ${PORT}`);
   })
   .catch((error) => console.log(error));
