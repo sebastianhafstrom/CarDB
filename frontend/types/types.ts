@@ -15,6 +15,37 @@ export type car = {
   bodyType: BodyType;
   website: string;
   imageUrl: string;
+  variants: carVariant[];
+  userReviews: userreview[];
+  professionalReviews: professionalreview[];
+};
+
+export type professionalreview = {
+  id: string;
+  title: string;
+  content: string;
+  rating: number;
+  website: string;
+};
+
+export type userreview = {
+  id: string;
+  title: string;
+  content: string;
+  rating: number;
+};
+
+export type carVariant = {
+  id: string;
+  name: string;
+  engines: carEngine[];
+};
+
+export type carEngine = {
+  id: string;
+  name: string;
+  fuelType: FuelType;
+  power: number;
 };
 
 export enum BodyType {
@@ -28,6 +59,14 @@ export enum BodyType {
   PICKUP = "PICKUP",
   VAN = "VAN",
   CABRIOLET = "CABRIOLET",
+}
+
+export enum FuelType {
+  PETROL = "petrol",
+  DIESEL = "diesel",
+  ELECTRIC = "electric",
+  HYBRID = "hybrid",
+  PHEV = "phev",
 }
 
 export const bodyTypeText = (bodyType: BodyType) => {

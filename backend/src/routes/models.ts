@@ -44,6 +44,8 @@ router.get("/models/:slug", async (req: Request, res: Response) => {
         variants: {
           engines: true,
         },
+        userReviews: true,
+        professionalReviews: true,
       },
       where: {
         slug: req.params.slug,

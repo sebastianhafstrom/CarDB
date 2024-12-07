@@ -2,11 +2,16 @@ import { In } from "typeorm";
 import { carBrandsToImport } from "../dataimport/brands";
 import { engines } from "../dataimport/engines";
 import { models } from "../dataimport/models";
+
+import { professionalReviews } from "../dataimport/professional-reviews";
+import { userReviews } from "../dataimport/user-reviews";
 import { variants } from "../dataimport/variants";
 import { CarBrand } from "./entity/CarBrand";
 import { CarEngine } from "./entity/CarEngine";
 import { CarModel } from "./entity/CarModel";
 import { CarModelVariant } from "./entity/CarModelVariant";
+import { ProfessionalReview } from "./entity/ProfessionalReview";
+import { UserReview } from "./entity/UserReview";
 
 export const importData = async () => {
   for (const brand of carBrandsToImport) {
@@ -55,5 +60,29 @@ export const importData = async () => {
     carModelVariant.engines = engines;
     await carModelVariant.save();
     console.log(`Created variant: ${variant.name}`);
+  }
+
+  for (const review of userReviews) {
+    const model = await CarModel.findOneBy({ id: review.carModelId });
+    const carReview = new UserReview();
+    carReview.title = review.title;
+    carReview.content = review.content;
+    carReview.rating = review.rating;
+    carReview.carModel = model;
+    await carReview.save();
+    console.log(`Created review: ${review.title}`);
+  }
+
+  for (const review of professionalReviews) {
+    const model = await CarModel.findOneBy({ id: review.carModelId });
+    const carReview = new ProfessionalReview();
+    carReview.title = review.title;
+    carReview.date = review.date;
+    carReview.website = review.website;
+    carReview.carModel = model;
+    carReview.content = review.content;
+    carReview.rating = review.rating;
+    await carReview.save();
+    console.log(`Created review: ${review.title}`);
   }
 };
