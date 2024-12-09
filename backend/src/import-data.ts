@@ -12,6 +12,7 @@ import { CarModel } from "./entity/CarModel";
 import { CarModelVariant } from "./entity/CarModelVariant";
 import { ProfessionalReview } from "./entity/ProfessionalReview";
 import { UserReview } from "./entity/UserReview";
+import { User } from "./entity/auth/user";
 
 export const importData = async () => {
   for (const brand of carBrandsToImport) {
@@ -35,6 +36,10 @@ export const importData = async () => {
     carModel.imageUrl = model.imageUrl;
     carModel.bodyType = model.bodyType;
     carModel.brand = brand;
+    carModel.length = model.length;
+    carModel.width = model.width;
+    carModel.height = model.height;
+    carModel.wheelbase = model.wheelbase;
     await carModel.save();
 
     console.log(`Created model: ${model.name}`);
@@ -46,6 +51,9 @@ export const importData = async () => {
     carEngine.name = engine.name;
     carEngine.fuelType = engine.fuelType;
     carEngine.power = engine.power;
+    carEngine.emissionStandard = engine.emissionStandard;
+    carEngine.fourWheelDrive = engine.fourWheelDrive;
+    carEngine.transmission = engine.transmission;
     await carEngine.save();
     console.log(`Created engine: ${engine.name}`);
   }
@@ -85,4 +93,10 @@ export const importData = async () => {
     await carReview.save();
     console.log(`Created review: ${review.title}`);
   }
+
+  const user = new User();
+  user.email = "admin";
+  user.password = "admin";
+  await user.save();
+  console.log("Created user: admin");
 };

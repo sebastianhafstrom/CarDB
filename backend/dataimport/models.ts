@@ -8,6 +8,10 @@ export const models: {
   bodyType: BodyType;
   website: string;
   imageUrl: string;
+  length?: number;
+  width?: number;
+  height?: number;
+  wheelbase?: number;
 }[] = [
   {
     id: "998d1efc-eece-4b46-bda0-6d4b01aecdfc",
@@ -38,6 +42,10 @@ export const models: {
       "https://cdn.skoda-auto.com/images/sites/enmaster-v2/e28af9f6-fbc7-4d6f-8813-aae9ce4cd138/c46ae914fc602fc54d78c332dec6499f/ModelCharacterGalleryModule/7632a1f0aa516594d6a0e94356eefae7250acf63669750b30971a08237c5496b/Default_bp576_1.webp",
     bodyType: BodyType.SUV,
     brand: "skoda",
+    height: 1683,
+    length: 4758,
+    width: 1864,
+    wheelbase: 2791,
   },
   {
     id: "90bf1447-174b-4418-9960-ea76f640e4b1",

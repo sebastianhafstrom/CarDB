@@ -29,7 +29,10 @@ export class CarModel extends BaseEntity {
   @Column()
   imageUrl: string;
 
-  @Column()
+  @Column({
+    type: "enum",
+    enum: BodyType,
+  })
   bodyType: BodyType;
 
   @ManyToOne(() => CarBrand, {
@@ -45,4 +48,17 @@ export class CarModel extends BaseEntity {
 
   @OneToMany(() => ProfessionalReview, (review) => review.carModel)
   professionalReviews: ProfessionalReview[];
+
+  // Dimensions
+  @Column({ nullable: true }) //just because I don't have all the data
+  length: number;
+
+  @Column({ nullable: true }) //just because I don't have all the data
+  width: number;
+
+  @Column({ nullable: true }) //just because I don't have all the data
+  height: number;
+
+  @Column({ nullable: true }) //just because I don't have all the data
+  wheelbase: number;
 }

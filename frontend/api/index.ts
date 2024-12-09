@@ -1,4 +1,4 @@
-import { brand, car } from "@/types/types";
+import { brand, car, user } from "@/types/types";
 import axios from "axios";
 
 export const api = axios.create({
@@ -31,5 +31,13 @@ export const getBrands = async (): Promise<brand[]> => {
 
 export const getBrand = async (slug: string): Promise<brand> => {
   const response = await api.get<brand>(`/brands/${slug}`);
+  return response.data;
+};
+
+export const loginUser = async (email: string, password: string) => {
+  const response = await api.post<user>("/auth/login", {
+    email,
+    password,
+  });
   return response.data;
 };

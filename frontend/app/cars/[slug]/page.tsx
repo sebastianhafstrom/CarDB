@@ -1,6 +1,7 @@
 "use client";
 import { getCarModel } from "@/api";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
 import { car } from "@/types/types";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -32,9 +33,6 @@ export default function CarPage() {
             Brand:{" "}
             <Link href={`/brands/${car.brand.slug}`}>{car.brand.name}</Link>
           </div>
-          <a href={car.website} target="_blank" rel="noreferrer">
-            Website
-          </a>
         </div>
         <div className="flex justify-between">
           <div className="w-full">
@@ -47,13 +45,21 @@ export default function CarPage() {
             </AspectRatio>
           </div>
         </div>
+        <div>
+          <Button asChild>
+            <Link href={car.website}>
+              Läs mer om {car.brand.name + " " + car.name} på{" "}
+              {new URL(car.website).hostname.replace(/^www\./, "")}
+            </Link>
+          </Button>
+        </div>
         <div className="mb-4">
           <h2>Car rating</h2>
-          <p>
+          <div>
             Rating:{" "}
             {car.userReviews.reduce((sum, review) => sum + review.rating, 0) /
               car.userReviews.length}
-          </p>
+          </div>
         </div>
         <div className="mb-4">
           <h2>Variants</h2>
@@ -98,6 +104,13 @@ export default function CarPage() {
               </li>
             ))}
           </ul>
+        </div>
+        <div className="mb-4">
+          <h2>Dimensions</h2>
+          <div>Length: {car.length} mm</div>
+          <div>Width: {car.width} mm</div>
+          <div>Height: {car.height} mm</div>
+          <div>Wheelbase: {car.wheelbase} mm</div>
         </div>
       </>
     );

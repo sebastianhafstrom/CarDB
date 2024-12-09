@@ -4,6 +4,7 @@ import express from "express";
 import { AppDataSource } from "./data-source";
 import { importData } from "./import-data";
 import authMiddleware from "./middlewares/auth";
+import { authRouter } from "./routes/auth/auth";
 import { brandsRouter } from "./routes/brands";
 import { modelsRouter } from "./routes/models";
 
@@ -11,8 +12,8 @@ require("dotenv").config();
 
 const coreConfig = {
   origin: [process.env.FRONTEND_URL],
-  methods: ["GET", "OPTIONS"],
-  allowedHeaders: ["x-api-key"],
+  methods: ["*"],
+  allowedHeaders: ["*"],
 };
 
 AppDataSource.initialize()
@@ -34,6 +35,7 @@ AppDataSource.initialize()
 
     app.use(brandsRouter);
     app.use(modelsRouter);
+    app.use(authRouter);
 
     // setup express app here
     // ...

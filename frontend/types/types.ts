@@ -18,6 +18,10 @@ export type car = {
   variants: carVariant[];
   userReviews: userreview[];
   professionalReviews: professionalreview[];
+  length: number;
+  width: number;
+  height: number;
+  wheelbase: number;
 };
 
 export type professionalreview = {
@@ -92,4 +96,10 @@ export const bodyTypeText = (bodyType: BodyType) => {
     case BodyType.CABRIOLET:
       return "Cabriolet";
   }
+};
+
+export type user = {
+  id: string;
+  email: string;
+  role: string;
 };

@@ -22,6 +22,9 @@ router.get("/models", async (req: Request, res: Response) => {
     const carModels = await CarModel.find({
       relations: {
         brand: true,
+        variants: {
+          engines: true,
+        },
       },
       where: {
         name: Like(`%${search as string}%`),
