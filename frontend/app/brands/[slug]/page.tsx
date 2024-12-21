@@ -58,7 +58,7 @@ export default function BrandPage() {
             {brand.website}
           </a>
         </div>
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-between gap-2 mt-4">
           <Input
             placeholder="Search..."
             value={search}
