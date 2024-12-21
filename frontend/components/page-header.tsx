@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { ModeToggle } from "./mode-toggle";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -48,7 +47,6 @@ export default function PageHeader({}) {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <ModeToggle />
     </div>
   );
 }
