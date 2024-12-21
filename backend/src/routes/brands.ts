@@ -21,9 +21,6 @@ router.get("/brands", async (req: Request, res: Response) => {
 router.get("/brands/:slug", async (req: Request, res: Response) => {
   try {
     const brand = await CarBrand.findOne({
-      relations: {
-        models: true,
-      },
       where: {
         slug: req.params.slug,
       },

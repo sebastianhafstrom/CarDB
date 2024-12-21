@@ -5,7 +5,6 @@ import { CarEngine } from "./entity/CarEngine";
 import { CarModel } from "./entity/CarModel";
 import { CarModelVariant } from "./entity/CarModelVariant";
 import { ProfessionalReview } from "./entity/ProfessionalReview";
-import { UserReview } from "./entity/UserReview";
 import { User } from "./entity/auth/user";
 
 require("dotenv").config();
@@ -21,7 +20,6 @@ export const AppDataSource = new DataSource({
     CarModel,
     CarModelVariant,
     CarEngine,
-    UserReview,
     ProfessionalReview,
     User,
   ],

@@ -6,14 +6,25 @@ export const api = axios.create({
   headers: { "x-api-key": process.env.NEXT_PUBLIC_BACKEND_API_KEY },
 });
 
-export const getCarModels = async (
-  search: string,
-  bodyTypes: string[]
-): Promise<car[]> => {
+type getCarModelsParams = {
+  search?: string;
+  bodyTypes?: string[];
+  brands?: string[];
+  fuelTypes?: string[];
+};
+
+export const getCarModels = async ({
+  search,
+  bodyTypes,
+  brands,
+  fuelTypes,
+}: getCarModelsParams): Promise<car[]> => {
   const response = await api.get<car[]>("/models", {
     params: {
       search,
-      bodyTypes: bodyTypes.join(","),
+      bodyTypes: bodyTypes?.join(","),
+      brands: brands?.join(","),
+      fuelTypes: fuelTypes?.join(","),
     },
   });
   return response.data;

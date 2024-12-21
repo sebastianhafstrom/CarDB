@@ -34,16 +34,14 @@ export default function CarPage() {
             <Link href={`/brands/${car.brand.slug}`}>{car.brand.name}</Link>
           </div>
         </div>
-        <div className="flex justify-between">
-          <div className="w-full">
-            <AspectRatio ratio={16 / 9}>
-              <img
-                src={car.imageUrl}
-                alt="Image"
-                className="rounded-md object-cover"
-              />
-            </AspectRatio>
-          </div>
+        <div className="w-3/4">
+          <AspectRatio ratio={16 / 9}>
+            <img
+              src={car.imageUrl}
+              alt="Image"
+              className="rounded-md object-cover"
+            />
+          </AspectRatio>
         </div>
         <div>
           <Button asChild>
@@ -53,14 +51,7 @@ export default function CarPage() {
             </Link>
           </Button>
         </div>
-        <div className="mb-4">
-          <h2>Car rating</h2>
-          <div>
-            Rating:{" "}
-            {car.userReviews.reduce((sum, review) => sum + review.rating, 0) /
-              car.userReviews.length}
-          </div>
-        </div>
+
         <div className="mb-4">
           <h2>Variants</h2>
           <ul>
@@ -79,28 +70,15 @@ export default function CarPage() {
           </ul>
         </div>
         <div className="mb-4">
-          <h2>User reviews</h2>
-          <ul>
-            {car.userReviews.map((review) => (
-              <li key={review.id}>
-                <h3>{review.title}</h3>
-                <p>{review.content}</p>
-                <p>Rating: {review.rating}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="mb-4">
           <h2>Professional reviews</h2>
           <ul>
             {car.professionalReviews.map((review) => (
               <li key={review.id}>
-                <h3>{review.title}</h3>
                 <a href={review.website} target="_blank" rel="noreferrer">
-                  To review website
+                  <h3>
+                    {review.title} (Rating: {review.rating})
+                  </h3>
                 </a>
-                <p>{review.content}</p>
-                <p>Rating: {review.rating}</p>
               </li>
             ))}
           </ul>

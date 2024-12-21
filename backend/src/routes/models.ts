@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { In, Like } from "typeorm";
 import { CarModel } from "../entity/CarModel";
-import { BodyType } from "../types";
+import { BodyType, FuelType } from "../types";
 
 const router = express.Router();
 
@@ -11,11 +11,24 @@ router.get("/models", async (req: Request, res: Response) => {
   if (!search) {
     search = "";
   }
+
   var bodyTypes = req.query.bodyTypes;
   if (!bodyTypes) {
     bodyTypes = Object.values(BodyType); // List all enum values if bodyTypes is not provided
   } else if (typeof bodyTypes === "string") {
     bodyTypes = bodyTypes.split(",");
+  }
+
+  var fuelTypes = req.query.fuelTypes;
+  if (!fuelTypes) {
+    fuelTypes = Object.values(FuelType); // List all enum values if bodyTypes is not provided
+  } else if (typeof fuelTypes === "string") {
+    fuelTypes = fuelTypes.split(",");
+  }
+
+  var brands: string[] | undefined = undefined;
+  if (typeof req.query.brands === "string" && req.query.brands !== "") {
+    brands = req.query.brands.split(",");
   }
 
   try {
@@ -29,6 +42,12 @@ router.get("/models", async (req: Request, res: Response) => {
       where: {
         name: Like(`%${search as string}%`),
         bodyType: In(bodyTypes as string[]),
+        brand: !!brands && brands.length > 0 ? { slug: In(brands) } : undefined,
+        variants: {
+          engines: {
+            fuelType: In(fuelTypes as string[]),
+          },
+        },
       },
     });
     res.json(carModels);
@@ -47,7 +66,6 @@ router.get("/models/:slug", async (req: Request, res: Response) => {
         variants: {
           engines: true,
         },
-        userReviews: true,
         professionalReviews: true,
       },
       where: {

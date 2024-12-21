@@ -16,7 +16,6 @@ export type car = {
   website: string;
   imageUrl: string;
   variants: carVariant[];
-  userReviews: userreview[];
   professionalReviews: professionalreview[];
   length: number;
   width: number;
@@ -30,13 +29,6 @@ export type professionalreview = {
   content: string;
   rating: number;
   website: string;
-};
-
-export type userreview = {
-  id: string;
-  title: string;
-  content: string;
-  rating: number;
 };
 
 export type carVariant = {
@@ -65,6 +57,47 @@ export enum BodyType {
   CABRIOLET = "CABRIOLET",
 }
 
+export const bodyTypeLabels: { value: string; label: string }[] = [
+  { value: BodyType.SEDAN, label: "Sedan" },
+  { value: BodyType.SUV, label: "SUV" },
+  { value: BodyType.CROSSOVER, label: "Crossover" },
+  { value: BodyType.HATCHBACK, label: "Hatchback" },
+  { value: BodyType.WAGON, label: "Wagon" },
+  { value: BodyType.COUPE, label: "Coupé" },
+  { value: BodyType.CONVERTIBLE, label: "Convertible" },
+  { value: BodyType.PICKUP, label: "Pickup" },
+  { value: BodyType.VAN, label: "Van" },
+  { value: BodyType.CABRIOLET, label: "Cabriolet" },
+];
+
+export enum Brand {
+  AUDI = "audi",
+  BMW = "bmw",
+  MERCEDES_BENZ = "mercedes-benz",
+  VOLKSWAGEN = "volkswagen",
+  TOYOTA = "toyota",
+  FORD = "ford",
+  KIA = "kia",
+  VOLVO = "volvo",
+  PEUGEOT = "peugeot",
+  RENAULT = "renault",
+  SKODA = "skoda",
+}
+
+export const brandLabels: { value: string; label: string }[] = [
+  { value: Brand.AUDI, label: "Audi" },
+  { value: Brand.BMW, label: "BMW" },
+  { value: Brand.MERCEDES_BENZ, label: "Mercedes-Benz" },
+  { value: Brand.VOLKSWAGEN, label: "Volkswagen" },
+  { value: Brand.TOYOTA, label: "Toyota" },
+  { value: Brand.FORD, label: "Ford" },
+  { value: Brand.KIA, label: "Kia" },
+  { value: Brand.VOLVO, label: "Volvo" },
+  { value: Brand.PEUGEOT, label: "Peugeot" },
+  { value: Brand.RENAULT, label: "Renault" },
+  { value: Brand.SKODA, label: "Skoda" },
+];
+
 export enum FuelType {
   PETROL = "petrol",
   DIESEL = "diesel",
@@ -72,6 +105,14 @@ export enum FuelType {
   HYBRID = "hybrid",
   PHEV = "phev",
 }
+
+export const fuelTypeLabels: { value: string; label: string }[] = [
+  { value: FuelType.PETROL, label: "Petrol" },
+  { value: FuelType.DIESEL, label: "Diesel" },
+  { value: FuelType.ELECTRIC, label: "Electric" },
+  { value: FuelType.HYBRID, label: "Hybrid" },
+  { value: FuelType.PHEV, label: "PHEV" },
+];
 
 export const bodyTypeText = (bodyType: BodyType) => {
   switch (bodyType) {

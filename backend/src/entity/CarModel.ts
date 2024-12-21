@@ -10,7 +10,6 @@ import { BodyType } from "../types";
 import { CarBrand } from "./CarBrand";
 import { CarModelVariant } from "./CarModelVariant";
 import { ProfessionalReview } from "./ProfessionalReview";
-import { UserReview } from "./UserReview";
 
 @Entity()
 export class CarModel extends BaseEntity {
@@ -42,9 +41,6 @@ export class CarModel extends BaseEntity {
 
   @OneToMany(() => CarModelVariant, (variant) => variant.model)
   variants: CarModelVariant[];
-
-  @OneToMany(() => UserReview, (review) => review.carModel)
-  userReviews: UserReview[];
 
   @OneToMany(() => ProfessionalReview, (review) => review.carModel)
   professionalReviews: ProfessionalReview[];

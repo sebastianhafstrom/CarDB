@@ -32,9 +32,11 @@ export default function CarCard({ car }: { car: car }) {
           {bodyTypeText(car.bodyType)}
           {car.variants && (
             <div>
-              {uniqueFuelTypes.map((fuelType) => (
-                <div key={fuelType}>{fuelType}</div>
-              ))}
+              {uniqueFuelTypes.map((fuelType, index) =>
+                index === uniqueFuelTypes.length - 1
+                  ? fuelType
+                  : fuelType + " | "
+              )}
             </div>
           )}
         </CardDescription>

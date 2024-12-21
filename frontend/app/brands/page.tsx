@@ -18,16 +18,18 @@ export default function Page() {
     fetchBrands();
   }, []);
 
-  if (brands) {
-    return (
-      <>
-        <div className="flex justify-between mb-2">
-          <h1 className="text-4xl font-bold">Brands</h1>
-        </div>
+  return (
+    <>
+      <div className="flex justify-between mb-2">
+        <h1 className="text-4xl font-bold">Brands</h1>
+      </div>
+      {brands === null && <div>Loading...</div>}
+      {brands != null && brands.length === 0 && <div>No brands found</div>}
+      {brands != null && brands.length > 0 && (
         <DataTable columns={columns} data={brands} />
-      </>
-    );
-  }
+      )}
+    </>
+  );
 }
 
 const columns: ColumnDef<brand>[] = [
