@@ -16,6 +16,7 @@ require("dotenv").config();
 var cookieParser = require("cookie-parser");
 const PgSession = require("connect-pg-simple")(session);
 const isProduction = process.env.NODE_ENV === "production";
+console.log("isProduction", isProduction);
 
 AppDataSource.initialize()
   .then(async () => {
@@ -32,9 +33,6 @@ AppDataSource.initialize()
         credentials: true, // Required to allow cookies
       }),
     );
-
-    // Extract PostgreSQL connection options from TypeORM DataSource
-    const connectionOptions = AppDataSource.options;
 
     // Create pg client using TypeORM connection details
     const pgClient = new Client({
