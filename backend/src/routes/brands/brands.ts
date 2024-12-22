@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { CarBrand } from "../entity/CarBrand";
+import { CarBrand } from "../../entity/CarBrand";
 
 const router = express.Router();
 

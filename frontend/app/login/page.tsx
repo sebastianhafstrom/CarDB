@@ -2,23 +2,22 @@
 import { loginUser } from "@/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { user } from "@/types/types";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Login() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [user, setUser] = useState<user | null>(null);
   const [error, setError] = useState<string>("");
 
   const handleLogin = async () => {
     setError("");
     try {
-      const res = await loginUser(email, password);
-      if (res) {
-        setUser(res);
-      }
+      await loginUser(email, password);
+      router.push("/admin");
     } catch (error: any) {
       if (error.response) {
         const { data } = error.response;
@@ -43,11 +42,6 @@ export default function Login() {
         className="mb-4"
       />
       <Button onClick={handleLogin}>Login</Button>
-      {user && (
-        <div className="mt-4">
-          {user.email} - {user.role}
-        </div>
-      )}
       {error && <div className="mt-4 text-red-500">{error}</div>}
     </div>
   );

@@ -24,8 +24,8 @@ export default function CarPage() {
   if (car) {
     return (
       <>
-        <div className="flex justify-between gap-4">
-          <div className="w-1/4 flex flex-col gap-4 items-start">
+        <div className="flex flex-col-reverse md:flex-row justify-between gap-4">
+          <div className="w-full md:w-1/2 flex flex-col gap-4 items-start">
             <h1 className="text-4xl font-bold pb-4">
               {car.brand.name + " " + car.name}
             </h1>
@@ -49,7 +49,7 @@ export default function CarPage() {
               <div>Wheelbase: {car.wheelbase} mm</div>
             </div>
           </div>
-          <div className="w-3/4">
+          <div className="w-full md:w-1/2">
             <AspectRatio ratio={16 / 9}>
               <img
                 src={car.imageUrl}

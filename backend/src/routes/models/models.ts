@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { In, Like } from "typeorm";
-import { CarModel } from "../entity/CarModel";
-import { BodyType, FuelType } from "../types";
+import { CarModel } from "../../entity/CarModel";
+import { BodyType, FuelType } from "../../types";
 
 const router = express.Router();
 

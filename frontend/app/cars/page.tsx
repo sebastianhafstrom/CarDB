@@ -44,96 +44,98 @@ export default function Page() {
       <div className="flex justify-between mb-5">
         <h1 className="text-4xl font-bold">Cars</h1>
       </div>
-      <div className="flex gap-2 mb-5">
+      <div className="flex gap-2 mb-5 flex-col md:flex-row">
         <Input
           placeholder="Search..."
           value={search}
           onChange={(event) => setSearch(event.target.value)}
+          className="sm:mb-2"
         />
+        <div className="flex gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Fuel types</Button>
+            </DropdownMenuTrigger>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">Fuel types</Button>
-          </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              {fuelTypeLabels.map(({ value, label }) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={value}
+                    checked={fuelTypesFilter.includes(value)}
+                    onCheckedChange={(checked) => {
+                      setFuelTypesFilter((prev) =>
+                        checked
+                          ? [...prev, value]
+                          : prev.filter((x) => x !== value)
+                      );
+                    }}
+                  >
+                    {label}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-          <DropdownMenuContent className="w-56">
-            {fuelTypeLabels.map(({ value, label }) => {
-              return (
-                <DropdownMenuCheckboxItem
-                  key={value}
-                  checked={fuelTypesFilter.includes(value)}
-                  onCheckedChange={(checked) => {
-                    setFuelTypesFilter((prev) =>
-                      checked
-                        ? [...prev, value]
-                        : prev.filter((x) => x !== value)
-                    );
-                  }}
-                >
-                  {label}
-                </DropdownMenuCheckboxItem>
-              );
-            })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Body types</Button>
+            </DropdownMenuTrigger>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">Body types</Button>
-          </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              {bodyTypeLabels.map(({ value, label }) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={value}
+                    checked={bodyTypesFilter.includes(value)}
+                    onCheckedChange={(checked) => {
+                      setBodyTypesFilter((prev) =>
+                        checked
+                          ? [...prev, value]
+                          : prev.filter((x) => x !== value)
+                      );
+                    }}
+                  >
+                    {label}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-          <DropdownMenuContent className="w-56">
-            {bodyTypeLabels.map(({ value, label }) => {
-              return (
-                <DropdownMenuCheckboxItem
-                  key={value}
-                  checked={bodyTypesFilter.includes(value)}
-                  onCheckedChange={(checked) => {
-                    setBodyTypesFilter((prev) =>
-                      checked
-                        ? [...prev, value]
-                        : prev.filter((x) => x !== value)
-                    );
-                  }}
-                >
-                  {label}
-                </DropdownMenuCheckboxItem>
-              );
-            })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Brands</Button>
+            </DropdownMenuTrigger>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">Brands</Button>
-          </DropdownMenuTrigger>
-
-          <DropdownMenuContent className="w-56">
-            {brandLabels.map(({ value, label }) => {
-              return (
-                <DropdownMenuCheckboxItem
-                  key={value}
-                  checked={brandsFilter.includes(value)}
-                  onCheckedChange={(checked) => {
-                    setBrandsFilter((prev) =>
-                      checked
-                        ? [...prev, value]
-                        : prev.filter((x) => x !== value)
-                    );
-                  }}
-                >
-                  {label}
-                </DropdownMenuCheckboxItem>
-              );
-            })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+            <DropdownMenuContent className="w-56">
+              {brandLabels.map(({ value, label }) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={value}
+                    checked={brandsFilter.includes(value)}
+                    onCheckedChange={(checked) => {
+                      setBrandsFilter((prev) =>
+                        checked
+                          ? [...prev, value]
+                          : prev.filter((x) => x !== value)
+                      );
+                    }}
+                  >
+                    {label}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       {cars === null && <div>Loading...</div>}
       {cars !== null && cars.length === 0 && <div>No cars found</div>}
       {cars !== null && cars.length > 0 && (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {cars.map((car) => (
             <Link
               key={car.id}

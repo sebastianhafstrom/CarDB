@@ -16,7 +16,7 @@ export class User extends BaseEntity {
   @Column()
   email: string;
 
-  @Column({ select: false })
+  @Column()
   password: string;
 
   @Column({ type: "enum", enum: Role, default: Role.USER })
@@ -28,7 +28,6 @@ export class User extends BaseEntity {
   }
 
   async comparePassword(password: string) {
-    console.log(password, this.password);
     return await bcrypt.compare(password, this.password);
   }
 }

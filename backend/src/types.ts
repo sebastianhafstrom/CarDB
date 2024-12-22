@@ -1,3 +1,9 @@
+declare module "express-session" {
+  interface SessionData {
+    userId?: string;
+  }
+}
+
 export enum BodyType {
   SEDAN = "SEDAN",
   SUV = "SUV",
