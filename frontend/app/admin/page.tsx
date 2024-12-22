@@ -8,7 +8,7 @@ import { brand, car, user } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const AdminPage = () => {
   const router = useRouter();
@@ -60,66 +60,70 @@ const AdminPage = () => {
   }, [brandsSearch]);
 
   return (
-    <Tabs onValueChange={handleTabChange} value={currentTab}>
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="brands">Bilmärken</TabsTrigger>
-        <TabsTrigger value="cars">Bilar</TabsTrigger>
-        <TabsTrigger value="users">Användare</TabsTrigger>
-      </TabsList>
-      <TabsContent value="brands">
-        <>
-          <h1 className="text-4xl font-bold mb-2">Bilmärken</h1>
-          <div className="flex gap-4 mb-2">
-            <Input
-              placeholder="Search..."
-              value={brandsSearch}
-              onChange={(event) => setBrandsSearch(event.target.value)}
-              className="sm:mb-2"
-            />
-            <Button asChild>
-              <Link href="/admin/brands/create">Lägg till</Link>
-            </Button>
-          </div>
-          {brands === null && <div>Loading...</div>}
-          {brands != null && brands.length === 0 && <div>No brands found</div>}
-          {brands != null && brands.length > 0 && (
-            <DataTable columns={brandColums} data={brands} />
-          )}
-        </>
-      </TabsContent>
-      <TabsContent value="cars">
-        <>
-          <h1 className="text-4xl font-bold mb-2">Bilar</h1>
+    <Suspense fallback={<div>Loading admin page...</div>}>
+      <Tabs onValueChange={handleTabChange} value={currentTab}>
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="brands">Bilmärken</TabsTrigger>
+          <TabsTrigger value="cars">Bilar</TabsTrigger>
+          <TabsTrigger value="users">Användare</TabsTrigger>
+        </TabsList>
+        <TabsContent value="brands">
+          <>
+            <h1 className="text-4xl font-bold mb-2">Bilmärken</h1>
+            <div className="flex gap-4 mb-2">
+              <Input
+                placeholder="Search..."
+                value={brandsSearch}
+                onChange={(event) => setBrandsSearch(event.target.value)}
+                className="sm:mb-2"
+              />
+              <Button asChild>
+                <Link href="/admin/brands/create">Lägg till</Link>
+              </Button>
+            </div>
+            {brands === null && <div>Loading...</div>}
+            {brands != null && brands.length === 0 && (
+              <div>No brands found</div>
+            )}
+            {brands != null && brands.length > 0 && (
+              <DataTable columns={brandColums} data={brands} />
+            )}
+          </>
+        </TabsContent>
+        <TabsContent value="cars">
+          <>
+            <h1 className="text-4xl font-bold mb-2">Bilar</h1>
 
-          <div className="flex gap-4 mb-2">
-            <Input
-              placeholder="Search..."
-              value={carModelsSearch}
-              onChange={(event) => setCarModelsSearch(event.target.value)}
-              className="sm:mb-2"
-            />
-            <Button asChild>
-              <Link href="/admin/cars/create">Lägg till</Link>
-            </Button>
-          </div>
-          {carModels === null && <div>Loading...</div>}
-          {carModels != null && carModels.length === 0 && (
-            <div>No brands found</div>
+            <div className="flex gap-4 mb-2">
+              <Input
+                placeholder="Search..."
+                value={carModelsSearch}
+                onChange={(event) => setCarModelsSearch(event.target.value)}
+                className="sm:mb-2"
+              />
+              <Button asChild>
+                <Link href="/admin/cars/create">Lägg till</Link>
+              </Button>
+            </div>
+            {carModels === null && <div>Loading...</div>}
+            {carModels != null && carModels.length === 0 && (
+              <div>No brands found</div>
+            )}
+            {carModels != null && carModels.length > 0 && (
+              <DataTable columns={carModelColumns} data={carModels} />
+            )}
+          </>
+        </TabsContent>
+        <TabsContent value="users">
+          <h1 className="text-4xl font-bold mb-2">Användare</h1>
+          {users === null && <div>Loading...</div>}
+          {users != null && users.length === 0 && <div>No users found</div>}
+          {users != null && users.length > 0 && (
+            <DataTable columns={userColumns} data={users} />
           )}
-          {carModels != null && carModels.length > 0 && (
-            <DataTable columns={carModelColumns} data={carModels} />
-          )}
-        </>
-      </TabsContent>
-      <TabsContent value="users">
-        <h1 className="text-4xl font-bold mb-2">Användare</h1>
-        {users === null && <div>Loading...</div>}
-        {users != null && users.length === 0 && <div>No users found</div>}
-        {users != null && users.length > 0 && (
-          <DataTable columns={userColumns} data={users} />
-        )}
-      </TabsContent>
-    </Tabs>
+        </TabsContent>
+      </Tabs>
+    </Suspense>
   );
 };
 
