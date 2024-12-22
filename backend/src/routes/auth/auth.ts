@@ -17,6 +17,8 @@ router.post("/auth/login", async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
     req.session.userId = user.id; // Set session identifier
+    console.log("logging in");
+    console.log(req.session);
     res.status(200).json({ message: "Logged in successfully" });
   } catch (error) {
     console.error(error);
