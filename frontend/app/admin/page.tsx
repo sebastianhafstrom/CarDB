@@ -49,7 +49,7 @@ const AdminPage = () => {
     fetchBrands();
     fetchCarModels();
     fetchUsers();
-  }, []);
+  }, [currentTab]);
 
   useEffect(() => {
     fetchCarModels();

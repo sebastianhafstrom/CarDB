@@ -96,7 +96,7 @@ export default function AdminCreateBrandPage() {
                   <Input placeholder="Volvo" {...field} />
                 </FormControl>
                 <FormDescription>
-                  Namnet på bilmärket, t.ex. "Volvo"
+                  Namnet på bilmärket, t.ex. Volvo
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -112,7 +112,7 @@ export default function AdminCreateBrandPage() {
                   <Input placeholder="Sverige" {...field} />
                 </FormControl>
                 <FormDescription>
-                  Ursprungsland för bilmärket, t.ex. "Sverige"
+                  Ursprungsland för bilmärket, t.ex. Sverige
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -128,7 +128,7 @@ export default function AdminCreateBrandPage() {
                   <Input placeholder="https://volvocars.com" {...field} />
                 </FormControl>
                 <FormDescription>
-                  Webbplats för bilmärket, t.ex. "https://volvocars.com"
+                  Webbplats för bilmärket, t.ex. https://volvocars.com
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -144,7 +144,7 @@ export default function AdminCreateBrandPage() {
                   <Input placeholder="volvo" {...field} />
                 </FormControl>
                 <FormDescription>
-                  Slug för bilmärket, t.ex. "volvo"
+                  Slug för bilmärket, t.ex. volvo
                 </FormDescription>
                 <FormMessage />
               </FormItem>
