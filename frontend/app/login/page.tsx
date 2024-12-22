@@ -2,11 +2,13 @@
 import { loginUser } from "@/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Login() {
   const router = useRouter();
+  const { refreshUser } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +19,8 @@ export default function Login() {
     setError("");
     try {
       await loginUser(email, password);
-      router.push("/admin");
+      await refreshUser();
+      router.push("/");
     } catch (error: any) {
       if (error.response) {
         const { data } = error.response;

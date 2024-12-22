@@ -34,4 +34,20 @@ router.post("/auth/logout", (req: Request, res: Response) => {
   });
 });
 
+router.get("/auth/me", async (req: Request, res: Response) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ message: "Not logged in" });
+  }
+  try {
+    const user = await User.findOneBy({ id: req.session.userId });
+    if (!user) {
+      return res.status(401).json({ message: "Not logged in" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 export { router as authRouter };

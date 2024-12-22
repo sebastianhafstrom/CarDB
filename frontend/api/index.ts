@@ -105,6 +105,11 @@ export const logoutUser = async () => {
   await api.post("/auth/logout");
 };
 
+export const getMe = async (): Promise<user> => {
+  const response = await api.get<user>("/auth/me");
+  return response.data;
+};
+
 export const getUsers = async (): Promise<user[]> => {
   const response = await api.get<user[]>("/admin/users");
   return response.data;

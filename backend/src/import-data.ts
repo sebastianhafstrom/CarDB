@@ -11,6 +11,7 @@ import { CarModel } from "./entity/CarModel";
 import { CarModelVariant } from "./entity/CarModelVariant";
 import { ProfessionalReview } from "./entity/ProfessionalReview";
 import { User } from "./entity/auth/user";
+import { Role } from "./types";
 
 export const importData = async () => {
   for (const brand of carBrandsToImport) {
@@ -84,6 +85,7 @@ export const importData = async () => {
   const user = new User();
   user.email = "admin";
   user.password = "admin";
+  user.role = Role.ADMIN;
   await user.save();
   console.log("Created user: admin");
 };
