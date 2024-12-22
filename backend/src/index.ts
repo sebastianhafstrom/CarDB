@@ -52,7 +52,7 @@ AppDataSource.initialize()
         cookie: {
           httpOnly: true,
           secure: isProduction, // Use true only in production
-          sameSite: "lax", // Use "none" for cross-origin in production
+          sameSite: isProduction ? "none" : "lax", // Use "none" for cross-origin in production
           maxAge: 24 * 60 * 60 * 1000, // 24 hours
         },
         store: new PgSession({
