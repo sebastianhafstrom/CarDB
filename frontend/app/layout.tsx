@@ -1,5 +1,4 @@
 import PageHeader from "@/components/page-header";
-import { AuthProvider } from "@/context/AuthContext";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
@@ -29,10 +28,8 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <AuthProvider>
-          <PageHeader />
-          <div className="container mx-auto py-10">{children}</div>
-        </AuthProvider>
+        <PageHeader />
+        <div className="container mx-auto py-10">{children}</div>
       </body>
     </html>
   );

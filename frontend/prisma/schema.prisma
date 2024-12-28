@@ -1,0 +1,185 @@
+// schema.prisma
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DB_URL")
+}
+
+model CarBrand {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    name    String
+    slug    String @unique
+    country String
+    website String
+    logoUrl String
+
+    models CarModel[]
+}
+
+enum BodyType {
+    SEDAN
+    SUV
+    CROSSOVER
+    HATCHBACK
+    WAGON
+    COUPE
+    CONVERTIBLE
+    PICKUP
+    VAN
+    CABRIOLET
+}
+
+model CarModel {
+    id                  String               @id @default(cuid())
+    createdAt           DateTime             @default(now())
+    updatedAt           DateTime             @updatedAt
+    name                String
+    slug                String               @unique
+    website             String
+    imageUrl            String
+    bodyType            BodyType
+    brand               CarBrand             @relation(fields: [brandId], references: [id])
+    brandId             String
+    variants            CarVariant[]
+    professionalReviews ProfessionalReview[]
+    length              Int
+    width               Int
+    height              Int
+    wheelbase           Int
+}
+
+model CarVariant {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    name      String
+    model     CarModel @relation(fields: [modelId], references: [id])
+    modelId   String
+    engines   Engine[]
+}
+
+enum FuelType {
+    PETROL
+    DIESEL
+    ELECTRIC
+    HYBRID
+    PHEV
+}
+
+enum Transmission {
+    MANUAL
+    AUTOMATIC
+}
+
+enum EmissionStandard {
+    EURO1
+    EURO2
+    EURO3
+    EURO4
+    EURO5
+    EURO6
+    EURO7
+}
+
+enum DriveType {
+    FWD
+    RWD
+    AWD
+}
+
+model Engine {
+    id               String           @id @default(cuid())
+    createdAt        DateTime         @default(now())
+    updatedAt        DateTime         @updatedAt
+    name             String
+    fuelType         FuelType
+    power            Int
+    torque           Int
+    displacement     Int
+    cylinders        Int
+    transmission     Transmission
+    driveType        DriveType
+    topSpeed         Int
+    acceleration     Int
+    fuelConsumption  Int
+    emissionStandard EmissionStandard
+    variant          CarVariant       @relation(fields: [variantId], references: [id])
+    variantId        String
+}
+
+model ProfessionalReview {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    title     String
+    content   String
+    website   String
+    imageUrl  String
+    date      DateTime
+    model     CarModel @relation(fields: [modelId], references: [id])
+    modelId   String
+}
+
+enum Role {
+    USER
+    ADMIN
+}
+
+model User {
+    id            String    @id @default(cuid())
+    name          String?
+    email         String    @unique
+    emailVerified DateTime?
+    image         String?
+    accounts      Account[]
+    sessions      Session[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Account {
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String?
+    access_token      String?
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String?
+    session_state     String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@id([provider, providerAccountId])
+}
+
+model Session {
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+    identifier String
+    token      String
+    expires    DateTime
+
+    @@id([identifier, token])
+}
