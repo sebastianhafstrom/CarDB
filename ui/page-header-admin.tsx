@@ -15,7 +15,7 @@ export default async function PageHeaderAdmin({}) {
   return (
     <NavigationMenuItem>
       <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-        <Link href="/admin">Admin</Link>
+        <Link href="/admin/cars">Admin</Link>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );
