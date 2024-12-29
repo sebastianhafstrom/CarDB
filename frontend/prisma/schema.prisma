@@ -2,11 +2,22 @@
 
 generator client {
     provider = "prisma-client-js"
+    seed     = "prisma/seed.ts"
 }
 
 datasource db {
     provider = "postgresql"
     url      = env("DB_URL")
+}
+
+enum Country {
+    SWEDEN
+    GERMANY
+    JAPAN
+    SOUTH_KOREA
+    UNITED_STATES
+    FRANCE
+    CZECH_REPUBLIC
 }
 
 model CarBrand {
@@ -15,8 +26,8 @@ model CarBrand {
     updatedAt DateTime @updatedAt
 
     name    String
-    slug    String @unique
-    country String
+    slug    String  @unique
+    country Country
     website String
     logoUrl String
 
@@ -119,7 +130,6 @@ model ProfessionalReview {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     title     String
-    content   String
     website   String
     imageUrl  String
     date      DateTime
