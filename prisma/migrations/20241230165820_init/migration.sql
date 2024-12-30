@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Country" AS ENUM ('SWEDEN', 'GERMANY', 'JAPAN', 'SOUTH_KOREA', 'UNITED_STATES', 'FRANCE', 'CZECH_REPUBLIC');
+CREATE TYPE "Country" AS ENUM ('SWEDEN', 'GERMANY', 'JAPAN', 'SOUTH_KOREA', 'UNITED_STATES', 'FRANCE', 'CZECH_REPUBLIC', 'ROMANIA', 'ITALY', 'UNITED_KINGDOM', 'SPAIN');
 
 -- CreateEnum
 CREATE TYPE "BodyType" AS ENUM ('SEDAN', 'SUV', 'CROSSOVER', 'HATCHBACK', 'WAGON', 'COUPE', 'CONVERTIBLE', 'PICKUP', 'VAN', 'CABRIOLET');
@@ -80,7 +80,6 @@ CREATE TABLE "Engine" (
     "acceleration" INTEGER NOT NULL,
     "fuelConsumption" INTEGER NOT NULL,
     "emissionStandard" "EmissionStandard" NOT NULL,
-    "variantId" TEXT NOT NULL,
 
     CONSTRAINT "Engine_pkey" PRIMARY KEY ("id")
 );
@@ -149,6 +148,14 @@ CREATE TABLE "VerificationToken" (
     CONSTRAINT "VerificationToken_pkey" PRIMARY KEY ("identifier","token")
 );
 
+-- CreateTable
+CREATE TABLE "_CarVariantToEngine" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL,
+
+    CONSTRAINT "_CarVariantToEngine_AB_pkey" PRIMARY KEY ("A","B")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "CarBrand_slug_key" ON "CarBrand"("slug");
 
@@ -161,14 +168,14 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
 
+-- CreateIndex
+CREATE INDEX "_CarVariantToEngine_B_index" ON "_CarVariantToEngine"("B");
+
 -- AddForeignKey
 ALTER TABLE "CarModel" ADD CONSTRAINT "CarModel_brandId_fkey" FOREIGN KEY ("brandId") REFERENCES "CarBrand"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "CarVariant" ADD CONSTRAINT "CarVariant_modelId_fkey" FOREIGN KEY ("modelId") REFERENCES "CarModel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Engine" ADD CONSTRAINT "Engine_variantId_fkey" FOREIGN KEY ("variantId") REFERENCES "CarVariant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ProfessionalReview" ADD CONSTRAINT "ProfessionalReview_modelId_fkey" FOREIGN KEY ("modelId") REFERENCES "CarModel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -178,3 +185,9 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_CarVariantToEngine" ADD CONSTRAINT "_CarVariantToEngine_A_fkey" FOREIGN KEY ("A") REFERENCES "CarVariant"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_CarVariantToEngine" ADD CONSTRAINT "_CarVariantToEngine_B_fkey" FOREIGN KEY ("B") REFERENCES "Engine"("id") ON DELETE CASCADE ON UPDATE CASCADE;

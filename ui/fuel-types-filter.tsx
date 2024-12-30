@@ -11,10 +11,10 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const fuelTypeLabels = [
   { value: FuelType.DIESEL, label: "Diesel" },
-  { value: FuelType.ELECTRIC, label: "Electric" },
+  { value: FuelType.ELECTRIC, label: "El" },
   { value: FuelType.HYBRID, label: "Hybrid" },
-  { value: FuelType.PETROL, label: "Petrol" },
-  { value: FuelType.PHEV, label: "PHEV" },
+  { value: FuelType.PETROL, label: "Bensin" },
+  { value: FuelType.PHEV, label: "Plugin hybrid (PHEV)" },
 ];
 
 export default function FuelTypesFilter() {

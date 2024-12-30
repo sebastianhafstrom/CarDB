@@ -44,6 +44,9 @@ export async function fetchFilteredBrands(query: string): Promise<CarBrand[]> {
           contains: query,
         },
       },
+      orderBy: {
+        name: "asc",
+      },
     });
     return brands;
   } catch (error) {
@@ -175,8 +178,10 @@ export async function fetchUniqueFuelTypes(carId: string): Promise<FuelType[]> {
         fuelType: true,
       },
       where: {
-        variant: {
-          modelId: carId,
+        variants: {
+          some: {
+            modelId: carId,
+          },
         },
       },
       distinct: ["fuelType"],

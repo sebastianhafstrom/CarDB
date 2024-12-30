@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/ui/components/card";
 import { CarBrand } from "@prisma/client";
+import Image from "next/image";
 
 export default function CarCard({ brand }: { brand: CarBrand }) {
   const carCount = fetchCarModelsCount(brand.id);
@@ -14,10 +15,12 @@ export default function CarCard({ brand }: { brand: CarBrand }) {
   return (
     <Card className="overflow-hidden h-70" x-chunk="dashboard-07-chunk-4">
       <CardContent>
-        <img
+        <Image
           src={brand.logoUrl}
           alt="Image"
-          className="rounded-md object-cover h-48 w-full"
+          className="rounded-md object-contain h-60 w-full"
+          width={300}
+          height={300}
         />
       </CardContent>
       <CardHeader>

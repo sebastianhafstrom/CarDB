@@ -1,10 +1,61 @@
 import { fetchCarBrandBySlug } from "@/lib/data";
 import BodyTypesFilter from "@/ui/body-types-filter";
 import CarCards from "@/ui/cars/car-cards";
+import { Button } from "@/ui/components/button";
 import FuelTypesFilter from "@/ui/fuel-types-filter";
 import Search from "@/ui/search";
-import { BodyType, FuelType } from "@prisma/client";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import { BodyType, Country, FuelType } from "@prisma/client";
+import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+
+const brandMeta: Record<Country, { label: string; flag: string }> = {
+  SWEDEN: {
+    label: "Sverige",
+    flag: "🇸🇪",
+  },
+  GERMANY: {
+    label: "Tyskland",
+    flag: "🇩🇪",
+  },
+  UNITED_STATES: {
+    label: "USA",
+    flag: "🇺🇸",
+  },
+  JAPAN: {
+    label: "Japan",
+    flag: "🇯🇵",
+  },
+  SOUTH_KOREA: {
+    label: "Sydkorea",
+    flag: "🇰🇷",
+  },
+  FRANCE: {
+    label: "Frankrike",
+    flag: "🇫🇷",
+  },
+  CZECH_REPUBLIC: {
+    label: "Tjeckien",
+    flag: "🇨🇿",
+  },
+  ROMANIA: {
+    label: "Rumänien",
+    flag: "🇷🇴",
+  },
+  ITALY: {
+    label: "Italien",
+    flag: "🇮🇹",
+  },
+  UNITED_KINGDOM: {
+    label: "Storbritannien",
+    flag: "🇬🇧",
+  },
+  SPAIN: {
+    label: "Spanien",
+    flag: "🇪🇸",
+  },
+};
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -43,16 +94,27 @@ export default async function Page(props: {
     notFound();
   }
 
+  const meta = brandMeta[brand.country];
+
   return (
     <>
-      <div className="flex items-center gap-4">
-        <h1 className="text-4xl font-bold">{brand.name}</h1>
-        <div>{brand.country}</div>
-        <a href={brand.website} target="_blank" rel="noreferrer">
-          {brand.website}
-        </a>
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <h1 className="text-4xl font-bold">{brand.name}</h1>
+          <span className="text-4xl">{meta.flag}</span>
+          <Button asChild className="ml-8">
+            <Link href={brand.website} className="flex items-center gap-2">
+              <span>
+                {new URL(brand.website).hostname.replace(/^www\./, "")}
+              </span>
+              <ArrowTopRightOnSquareIcon className="h-5" />
+            </Link>
+          </Button>
+        </div>
+        <Image src={brand.logoUrl} alt="Image" width={300} height={200} />
       </div>
 
+      <h2 className="text-2xl">Bilar</h2>
       <div className="flex justify-between gap-2 mt-4">
         <Search placeholder="Sök..." />
         <FuelTypesFilter />

@@ -12,13 +12,13 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 const bodyTypeLabels = [
   { value: BodyType.SEDAN, label: "Sedan" },
   { value: BodyType.SUV, label: "SUV" },
-  { value: BodyType.CROSSOVER, label: "Crossover" },
-  { value: BodyType.HATCHBACK, label: "Hatchback" },
-  { value: BodyType.WAGON, label: "Wagon" },
+  { value: BodyType.CROSSOVER, label: "CUV" },
+  { value: BodyType.HATCHBACK, label: "Halvkombi" },
+  { value: BodyType.WAGON, label: "Kombi" },
   { value: BodyType.COUPE, label: "Coupe" },
   { value: BodyType.CONVERTIBLE, label: "Convertible" },
   { value: BodyType.PICKUP, label: "Pickup" },
-  { value: BodyType.VAN, label: "Van" },
+  { value: BodyType.VAN, label: "Skåpbil" },
   { value: BodyType.CABRIOLET, label: "Cabriolet" },
 ];
 
