@@ -55,6 +55,28 @@ export async function fetchFilteredBrands(query: string): Promise<CarBrand[]> {
   }
 }
 
+export async function fetchFilteredBrandsAdmin(query: string) {
+  try {
+    const brands = await prisma.carBrand.findMany({
+      include: {
+        models: true,
+      },
+      where: {
+        name: {
+          contains: query,
+        },
+      },
+      orderBy: {
+        name: "asc",
+      },
+    });
+    return brands;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch brands.");
+  }
+}
+
 export async function fetchBrandsPages(query: string) {
   try {
     const count = await prisma.carBrand.count({
@@ -148,6 +170,27 @@ export async function fetchFilteredCarModels({
               },
             }
           : {}),
+      },
+    });
+    return cars;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch cars.");
+  }
+}
+
+export async function fetchFilteredCarModelsAdmin(query: string) {
+  try {
+    const cars = await prisma.carModel.findMany({
+      include: {
+        brand: true,
+        variants: true,
+      },
+
+      where: {
+        name: {
+          contains: query,
+        },
       },
     });
     return cars;

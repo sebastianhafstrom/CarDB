@@ -13,10 +13,22 @@ export default async function PageHeaderAdmin({}) {
   //}
 
   return (
-    <NavigationMenuItem>
-      <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-        <Link href="/admin/cars">Admin</Link>
-      </NavigationMenuLink>
-    </NavigationMenuItem>
+    <>
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <Link href="/admin/cars">Bilar (admin)</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <Link href="/admin/brands">Bilmärken (admin)</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <Link href="/admin/users">Användare (admin)</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+    </>
   );
 }
