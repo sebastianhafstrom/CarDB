@@ -1,3 +1,4 @@
+import { getCurrentUser } from "@/lib/session";
 import {
   NavigationMenuItem,
   NavigationMenuLink,
@@ -6,11 +7,11 @@ import {
 import Link from "next/link";
 
 export default async function PageHeaderAdmin({}) {
-  //const user = await getCurrentUser();
+  const user = await getCurrentUser();
 
-  //if (!user || user) {
-  //  return null;
-  //}
+  if (!user || !user) {
+    return null;
+  }
 
   return (
     <>

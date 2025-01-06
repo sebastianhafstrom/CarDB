@@ -289,3 +289,28 @@ export async function fetchCarVariantsByModelId(modelId: string) {
     throw new Error("Failed to fetch car variants.");
   }
 }
+
+export async function fetchfilteredUsers(query: string) {
+  try {
+    const users = await prisma.user.findMany({
+      where: {
+        OR: [
+          {
+            email: {
+              contains: query,
+            },
+          },
+          {
+            name: {
+              contains: query,
+            },
+          },
+        ],
+      },
+    });
+    return users;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch users.");
+  }
+}
