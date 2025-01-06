@@ -103,11 +103,6 @@ export async function fetchCarModelBySlug(slug: string) {
       },
       include: {
         brand: true,
-        variants: {
-          include: {
-            engines: true,
-          },
-        },
         professionalReviews: true,
       },
     });
@@ -115,6 +110,33 @@ export async function fetchCarModelBySlug(slug: string) {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch car.");
+  }
+}
+
+export async function fetchSimilarCarModels(modelId: string) {
+  const car = await prisma.carModel.findUnique({
+    where: {
+      id: modelId,
+    },
+  });
+  if (!car) {
+    throw new Error("Car not found.");
+  }
+
+  try {
+    const cars = await prisma.carModel.findMany({
+      where: {
+        id: {
+          not: modelId,
+        },
+        bodyType: car.bodyType,
+        brandId: car.brandId,
+      },
+    });
+    return cars;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch similar cars.");
   }
 }
 
@@ -233,5 +255,37 @@ export async function fetchUniqueFuelTypes(carId: string): Promise<FuelType[]> {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch unique fuel types.");
+  }
+}
+
+export async function fetchEnginesByVariantId(variantId: string) {
+  try {
+    const engines = await prisma.engine.findMany({
+      where: {
+        variants: {
+          some: {
+            id: variantId,
+          },
+        },
+      },
+    });
+    return engines;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch engines.");
+  }
+}
+
+export async function fetchCarVariantsByModelId(modelId: string) {
+  try {
+    const variants = await prisma.carVariant.findMany({
+      where: {
+        modelId,
+      },
+    });
+    return variants;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch car variants.");
   }
 }

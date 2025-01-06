@@ -1,4 +1,5 @@
 import { fetchFilteredBrandsAdmin } from "@/lib/data";
+import { brandMeta } from "@/types/types";
 import Image from "next/image";
 import { UpdateBrand } from "./buttons";
 
@@ -56,6 +57,9 @@ export default async function BrandsTable({ query }: { query?: string }) {
                   Slug
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
+                  Land
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
                   Antal bilar
                 </th>
                 {/* <th scope="col" className="px-3 py-5 font-medium">
@@ -88,6 +92,11 @@ export default async function BrandsTable({ query }: { query?: string }) {
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">{brand.slug}</td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {`${brandMeta[brand.country].label} ${
+                      brandMeta[brand.country].flag
+                    }`}
+                  </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {brand.models.length}
                   </td>

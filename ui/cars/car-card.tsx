@@ -1,4 +1,5 @@
 import { fetchCarBrandById, fetchUniqueFuelTypes } from "@/lib/data";
+import { bodyTypeLabels, fuelTypeLabels } from "@/types/types";
 import {
   Card,
   CardContent,
@@ -6,28 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/components/card";
-import { BodyType, CarModel, FuelType } from "@prisma/client";
-
-const carDetails: Record<BodyType, string> = {
-  SEDAN: "Sedan",
-  SUV: "SUV",
-  CROSSOVER: "CUV",
-  HATCHBACK: "Halvkombi",
-  COUPE: "Kupé",
-  CONVERTIBLE: "Cabriolet",
-  WAGON: "Kombi",
-  PICKUP: "Pickup",
-  VAN: "Skåpbil",
-  CABRIOLET: "Cabriolet",
-};
-
-const fuelTypeLabels: Record<FuelType, string> = {
-  PETROL: "Bensin",
-  DIESEL: "Diesel",
-  ELECTRIC: "El",
-  HYBRID: "Hybrid",
-  PHEV: "Plugin hybrid",
-};
+import { CarModel } from "@prisma/client";
 
 export default async function CarCard({ car }: { car: CarModel }) {
   const [brand, fuelTypes] = await Promise.all([
@@ -52,7 +32,7 @@ export default async function CarCard({ car }: { car: CarModel }) {
           </div>
         </CardTitle>
         <CardDescription>
-          {carDetails[car.bodyType]}
+          {bodyTypeLabels[car.bodyType]}
           <div>
             {fuelTypes.map((fuelType, index) =>
               index === fuelTypes.length - 1

@@ -1,23 +1,10 @@
 "use client";
 import { BrandState, createBrand } from "@/lib/actions";
+import { countryLabels } from "@/types/types";
 import { Button } from "@/ui/components/button";
-import { Country } from "@prisma/client";
 import Link from "next/link";
 import { useActionState, useState } from "react";
 
-const countryLabels: { value: Country; label: string }[] = [
-  { value: Country.SWEDEN, label: "Sverige 🇸🇪" },
-  { value: Country.UNITED_STATES, label: "USA 🇺🇸" },
-  { value: Country.JAPAN, label: "Japan 🇯🇵" },
-  { value: Country.GERMANY, label: "Tyskland 🇩🇪" },
-  { value: Country.FRANCE, label: "Frankrike 🇫🇷" },
-  { value: Country.ITALY, label: "Italien 🇮🇹" },
-  { value: Country.SOUTH_KOREA, label: "Sydkorea 🇰🇷" },
-  { value: Country.UNITED_KINGDOM, label: "Storbritannien 🇬🇧" },
-  { value: Country.CZECH_REPUBLIC, label: "Tjeckien 🇨🇿" },
-  { value: Country.ROMANIA, label: "Rumänien 🇷🇴" },
-  { value: Country.SPAIN, label: "Spanien 🇪🇸" },
-];
 export default function CreateBrandForm() {
   const initialState: BrandState = { message: null, errors: {} };
   const [state, formAction] = useActionState(createBrand, initialState);

@@ -1,61 +1,15 @@
 import { fetchCarBrandBySlug } from "@/lib/data";
+import { brandMeta } from "@/types/types";
 import BodyTypesFilter from "@/ui/body-types-filter";
 import CarCards from "@/ui/cars/car-cards";
 import { Button } from "@/ui/components/button";
 import FuelTypesFilter from "@/ui/fuel-types-filter";
 import Search from "@/ui/search";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-import { BodyType, Country, FuelType } from "@prisma/client";
+import { BodyType, FuelType } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
-const brandMeta: Record<Country, { label: string; flag: string }> = {
-  SWEDEN: {
-    label: "Sverige",
-    flag: "🇸🇪",
-  },
-  GERMANY: {
-    label: "Tyskland",
-    flag: "🇩🇪",
-  },
-  UNITED_STATES: {
-    label: "USA",
-    flag: "🇺🇸",
-  },
-  JAPAN: {
-    label: "Japan",
-    flag: "🇯🇵",
-  },
-  SOUTH_KOREA: {
-    label: "Sydkorea",
-    flag: "🇰🇷",
-  },
-  FRANCE: {
-    label: "Frankrike",
-    flag: "🇫🇷",
-  },
-  CZECH_REPUBLIC: {
-    label: "Tjeckien",
-    flag: "🇨🇿",
-  },
-  ROMANIA: {
-    label: "Rumänien",
-    flag: "🇷🇴",
-  },
-  ITALY: {
-    label: "Italien",
-    flag: "🇮🇹",
-  },
-  UNITED_KINGDOM: {
-    label: "Storbritannien",
-    flag: "🇬🇧",
-  },
-  SPAIN: {
-    label: "Spanien",
-    flag: "🇪🇸",
-  },
-};
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;

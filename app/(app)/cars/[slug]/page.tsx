@@ -1,4 +1,7 @@
 import { fetchCarModelBySlug } from "@/lib/data";
+import { bodyTypeLabels } from "@/types/types";
+import CarVariantCards from "@/ui/cars/car-variant-cards";
+import SimilarCarsCards from "@/ui/cars/similar-cars-cards";
 import { Button } from "@/ui/components/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,19 +24,22 @@ export default async function CarPage(props: {
         <div className="flex flex-col-reverse md:flex-row justify-between gap-4">
           <div className="w-full md:w-1/2 flex flex-col gap-4 items-start">
             <h1 className="text-4xl font-bold pb-4">
-              {car.brand.name + " " + car.name}
+              {car.brand.name +
+                " " +
+                car.name +
+                " | " +
+                bodyTypeLabels[car.bodyType]}
             </h1>
-            <div>Kaross: {car.bodyType}</div>
             <div>
-              Märke:{" "}
-              <Link href={`/brands/${car.brand.slug}`}>{car.brand.name}</Link>
-            </div>
-            <Button asChild>
-              <Link href={car.website}>
-                {car.brand.name + " " + car.name} på{" "}
-                {new URL(car.website).hostname.replace(/^www\./, "")}
+              <Link href={`/brands/${car.brand.slug}`}>
+                <Image
+                  src={car.brand.logoUrl}
+                  alt="Image"
+                  width={200}
+                  height={150}
+                />
               </Link>
-            </Button>
+            </div>
 
             <div className="mb-4">
               <h2 className="text-2xl font-bold">Dimensioner</h2>
@@ -43,7 +49,7 @@ export default async function CarPage(props: {
               <div>Hjulbas: {car.wheelbase} mm</div>
             </div>
           </div>
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 flex flex-col gap-4 items-end">
             <Image
               src={car.imageUrl}
               alt="Image"
@@ -51,40 +57,20 @@ export default async function CarPage(props: {
               width={800}
               height={600}
             />
+            <Button className="mt-4" asChild>
+              <Link href={car.website}>
+                {"Läs mer om " + car.brand.name + " " + car.name} på{" "}
+                {new URL(car.website).hostname.replace(/^www\./, "")}
+              </Link>
+            </Button>
           </div>
         </div>
 
-        <div className="flex">
-          <div className="mb-4 w-1/2">
-            <h2 className="text-2xl font-bold">Varianter</h2>
-            <ul>
-              {car.variants.map((variant) => (
-                <li className="mb-2" key={variant.id}>
-                  <h3 className="text-xl">{variant.name}</h3>
-                  <ul>
-                    {variant.engines.map((engine) => (
-                      <li key={engine.id}>
-                        {engine.name} - {engine.fuelType} - {engine.power} hp
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="mb-4 w-1/2">
-            <h2 className="text-2xl font-bold">Recensioner</h2>
-            <ul>
-              {car.professionalReviews.map((review) => (
-                <li key={review.id}>
-                  <a href={review.website} target="_blank" rel="noreferrer">
-                    <h3>{review.title}</h3>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <h2 className="text-2xl font-bold">Varianter</h2>
+        <CarVariantCards modelId={car.id} />
+
+        <h2 className="mt-4 text-2xl font-bold">Liknande bilar</h2>
+        <SimilarCarsCards modelId={car.id} />
       </>
     );
   }

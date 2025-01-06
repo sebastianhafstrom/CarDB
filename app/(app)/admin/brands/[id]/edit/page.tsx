@@ -14,7 +14,7 @@ export default async function AdminBrandsPage(props: {
   }
   return (
     <>
-      <h1 className="text-4xl">Uppdater {brand.name}</h1>
+      <h1 className="text-4xl">Uppdatera {brand.name}</h1>
       <EditBrandForm brand={brand} />
     </>
   );

@@ -1,23 +1,11 @@
 "use client";
 import { BrandState, updateBrand } from "@/lib/actions";
+import { countryLabels } from "@/types/types";
 import { Button } from "@/ui/components/button";
-import { CarBrand, Country } from "@prisma/client";
+import { CarBrand } from "@prisma/client";
 import Link from "next/link";
 import { useActionState, useState } from "react";
 
-const countryLabels: { value: Country; label: string }[] = [
-  { value: Country.SWEDEN, label: "Sverige 🇸🇪" },
-  { value: Country.UNITED_STATES, label: "USA 🇺🇸" },
-  { value: Country.JAPAN, label: "Japan 🇯🇵" },
-  { value: Country.GERMANY, label: "Tyskland 🇩🇪" },
-  { value: Country.FRANCE, label: "Frankrike 🇫🇷" },
-  { value: Country.ITALY, label: "Italien 🇮🇹" },
-  { value: Country.SOUTH_KOREA, label: "Sydkorea 🇰🇷" },
-  { value: Country.UNITED_KINGDOM, label: "Storbritannien 🇬🇧" },
-  { value: Country.CZECH_REPUBLIC, label: "Tjeckien 🇨🇿" },
-  { value: Country.ROMANIA, label: "Rumänien 🇷🇴" },
-  { value: Country.SPAIN, label: "Spanien 🇪🇸" },
-];
 export default function EditBrandForm({ brand }: { brand: CarBrand }) {
   const initialState: BrandState = { message: null, errors: {} };
   const updateBrandWithId = updateBrand.bind(null, brand.id);
@@ -51,7 +39,6 @@ export default function EditBrandForm({ brand }: { brand: CarBrand }) {
                 placeholder="Ange bilmärkets namn"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 value={name}
-                defaultValue={name}
                 onChange={handleNameChange}
                 aria-describedby="name-error"
               />
@@ -80,7 +67,6 @@ export default function EditBrandForm({ brand }: { brand: CarBrand }) {
                 type="text"
                 readOnly
                 value={slug}
-                defaultValue={slug}
                 placeholder="Ange bilmärkets slug"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="slug-error"
@@ -170,7 +156,6 @@ export default function EditBrandForm({ brand }: { brand: CarBrand }) {
                 name="logoUrl"
                 type="text"
                 value={logoUrl}
-                defaultValue={logoUrl}
                 readOnly
                 placeholder="Ange bilmärkets loggas länk"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"

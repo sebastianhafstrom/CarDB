@@ -15,7 +15,7 @@ export default async function PageHeaderAuth({}) {
           Welcome back, <b>{user.name}</b>!
         </p>
       )}
-      <NavigationMenu>
+      <NavigationMenu className="ml-4">
         <NavigationMenuList>
           {user ? (
             <NavigationMenuItem className="ml-auto">
